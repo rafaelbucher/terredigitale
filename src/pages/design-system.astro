@@ -53,19 +53,19 @@ import Logo from '../components/Logo.astro';
         <h3>Variantes de couleur</h3>
         <div class="logo-variants-demo">
           <div class="logo-variant-item">
-            <Logo size="lg" variant="primary" />
+            <Logo size="md" variant="primary" />
             <code>primary</code>
           </div>
           <div class="logo-variant-item bg-dark">
-            <Logo size="lg" variant="light" />
+            <Logo size="md" variant="light" />
             <code>light</code>
           </div>
           <div class="logo-variant-item">
-            <Logo size="lg" variant="secondary" />
+            <Logo size="md" variant="secondary" />
             <code>secondary</code>
           </div>
           <div class="logo-variant-item">
-            <Logo size="lg" variant="highlight" />
+            <Logo size="md" variant="highlight" />
             <code>highlight</code>
           </div>
         </div>
@@ -83,6 +83,29 @@ import Logo from '../components/Logo.astro';
             class="demo-interactive-logo"
           />
           <p><small>Survolez le logo pour voir l'effet interactif</small></p>
+        </div>
+      </div>
+      
+      <!-- Usage interactif -->
+      <div class="subsection">
+        <h3>Icones</h3>
+        <div class="logo-variants-demo">
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="primary" showText={false}/>
+            <code>primary</code>
+          </div>
+          <div class="logo-variant-item bg-dark">
+            <Logo size="lg" variant="light" showText={false}/>
+            <code>light</code>
+          </div>
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="secondary" showText={false}/>
+            <code>secondary</code>
+          </div>
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="highlight" showText={false}/>
+            <code>highlight</code>
+          </div>
         </div>
       </div>
     </section>
@@ -166,14 +189,26 @@ import Logo from '../components/Logo.astro';
 </MinimalLayout>
 
 <style>
+
+  .container {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0;
+    padding: 0 var(--space-md);
+  }
+
   .intro-text {
     font-size: var(--font-size-lg);
     color: var(--color-primary-light);
     margin-bottom: var(--space-2xl);
   }
+
+  .section {
+    padding-top: 0;
+  }
   
   .subsection {
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
   }
   
   .subsection h3 {

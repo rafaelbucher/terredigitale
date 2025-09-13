@@ -100,19 +100,19 @@ const linkProps = href ? { href } : {};
   .logo-2xl .logo-text { font-size: 34px; }
   .logo-3xl .logo-text { font-size: 54px; }
   
-  /* Couleurs du SVG */
-  .logo-primary path { fill: #1E1E1E; }
-  .logo-light path { fill: #F7F7F5; }
-  .logo-secondary path { fill: #FA6147; }
-  .logo-highlight path { fill: #08A890; }
+  /* Couleurs du SVG - CORRIGÉES */
+  .logo-primary path { fill: var(--color-primary); }
+  .logo-light path { fill: var(--color-neutral-lighter); }
+  .logo-secondary path { fill: var(--color-secondary); }
+  .logo-highlight path { fill: var(--color-highlight); }
   .logo-mono-white path { fill: #FFFFFF; }
   .logo-mono-black path { fill: #000000; }
   
-  /* Couleurs du texte */
-  .logo-text-primary { color: #1E1E1E; }
-  .logo-text-light { color: #F7F7F5; }
-  .logo-text-secondary { color: #FA6147; }
-  .logo-text-highlight { color: #08A890; }
+  /* Couleurs du texte - CORRIGÉES */
+  .logo-text-primary { color: var(--color-primary); }
+  .logo-text-light { color: var(--color-neutral-lighter); }
+  .logo-text-secondary { color: var(--color-secondary); }
+  .logo-text-highlight { color: var(--color-highlight); }
   .logo-text-mono-white { color: #FFFFFF; }
   .logo-text-mono-black { color: #000000; }
   
@@ -135,7 +135,7 @@ const linkProps = href ? { href } : {};
   }
   
   .logo-interactive:focus {
-    outline: 2px solid #08A890;
+    outline: 2px solid var(--color-highlight);
     outline-offset: 4px;
     border-radius: 4px;
   }
