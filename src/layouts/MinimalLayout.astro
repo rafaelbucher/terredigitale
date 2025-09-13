@@ -1,5 +1,8 @@
 ---
 // src/layouts/MinimalLayout.astro
+// Import direct du CSS - IMPORTANT pour le build
+import '../styles/global.css';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -58,9 +61,6 @@ const canonicalURL = getCanonicalURL();
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url.origin)} />
-    
-    <!-- Import du CSS global avec le système de tokens -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
     
     <!-- Préchargement des polices critiques -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

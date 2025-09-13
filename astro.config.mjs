@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   // URL de votre site en production
-  site: 'https://terredigitale.netlify.app', // Remplacez par votre URL Netlify
+  site: 'https://terredigitale.netlify.app',
   
   // Configuration pour Netlify
   output: 'static', // Site statique (par défaut)
@@ -15,8 +15,12 @@ export default defineConfig({
       devSourcemap: true // Sourcemap CSS en dev
     },
     build: {
-      cssCodeSplit: false, // Garder le CSS ensemble
-      assetsInlineLimit: 0
+      assetsInlineLimit: 0, // Évite l'inlining des assets
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name].[hash][extname]'
+        }
+      }
     }
   }
 });
