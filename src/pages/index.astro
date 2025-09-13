@@ -1,0 +1,113 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Accueil - Mon Site Astro"
+  description="Bienvenue sur mon site développé avec Astro et un système de design tokens"
+>
+  <div class="container">
+    <section class="hero section">
+      <div class="hero-content">
+        <h1 class="hero-title">Bienvenue sur mon site</h1>
+        <p class="hero-description">
+          Site développé avec Astro et un système de design tokens complet
+        </p>
+        <div class="hero-actions">
+          <a href="/design-system" class="btn btn-primary">
+            Voir le Design System
+          </a>
+          <a href="#features" class="btn btn-secondary">
+            En savoir plus
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="features" class="features section">
+      <h2>Fonctionnalités</h2>
+      <div class="features-grid">
+        <div class="card">
+          <h3 class="text-secondary">🎨 Design System</h3>
+          <p>Système de tokens complet avec couleurs, typographie, espacements et plus.</p>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-highlight">⚡ Performance</h3>
+          <p>Optimisé avec Astro pour des performances exceptionnelles.</p>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-primary">📱 Responsive</h3>
+          <p>Interface adaptée à tous les écrans grâce aux breakpoints.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Styles spécifiques à la page d'accueil */
+  .hero {
+    text-align: center;
+    padding: var(--space-4xl) 0;
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    background-clip: text;
+  }
+  
+  .hero-description {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary); /* Couleur moins contrastée pour la description */
+    max-width: 600px;
+    margin: 0 auto var(--space-xl);
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  
+  .features-grid .card {
+    text-align: center;
+  }
+  
+  .features-grid h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: var(--font-size-3xl);
+    }
+    
+    .hero-description {
+      font-size: var(--font-size-lg);
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

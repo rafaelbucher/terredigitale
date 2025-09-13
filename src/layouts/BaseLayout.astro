@@ -1,0 +1,116 @@
+---
+// src/layouts/BaseLayout.astro
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const { 
+  title = "Mon Site Astro",
+  description = "Description par défaut de mon site",
+  image = "/favicon.svg",
+  canonical 
+} = Astro.props;
+
+const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url.origin)} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url.origin)} />
+    
+    <!-- Import du CSS global avec le système de tokens -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    
+    <!-- Préchargement des polices critiques -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  
+  <body>
+    <!-- Header optionnel -->
+    <header class="site-header">
+      <nav class="container">
+        <!-- Navigation sera ajoutée ici -->
+      </nav>
+    </header>
+    
+    <!-- Contenu principal -->
+    <main class="site-main">
+      <slot />
+    </main>
+    
+    <!-- Footer optionnel -->
+    <footer class="site-footer">
+      <div class="container">
+        <!-- Footer sera ajouté ici -->
+      </div>
+    </footer>
+    
+    <!-- Scripts optionnels -->
+    <script>
+      // Scripts globaux si nécessaire
+      console.log('🚀 Site chargé avec le système de design tokens');
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Styles spécifiques au layout */
+  .site-header {
+    background-color: var(--color-primary-light);
+    border-bottom: 1px solid var(--color-primary-lighter);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-navbar);
+    padding: var(--space-md) 0;
+  }
+  
+  .site-main {
+    min-height: calc(100vh - 120px); /* Ajuster selon header/footer */
+    padding: var(--space-lg) 0;
+  }
+  
+  .site-footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-neutral-lighter);
+    padding: var(--space-xl) 0;
+    margin-top: auto;
+    border-top: 1px solid var(--color-primary-lighter);
+  }
+  
+  /* Assurer que le body prend toute la hauteur */
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
