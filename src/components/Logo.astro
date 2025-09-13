@@ -1,0 +1,170 @@
+---
+// src/components/Logo.astro
+export interface Props {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  variant?: 'primary' | 'light' | 'secondary' | 'highlight' | 'mono-white' | 'mono-black';
+  href?: string;
+  alt?: string;
+  class?: string;
+  interactive?: boolean;
+  showText?: boolean;
+}
+
+const { 
+  size = 'md',
+  variant = 'primary',
+  href,
+  alt = 'Terre Digitale',
+  class: className = '',
+  interactive = false,
+  showText = true
+} = Astro.props;
+
+const Component = href ? 'a' : 'div';
+const linkProps = href ? { href } : {};
+---
+
+<Component {...linkProps} class={`logo-container logo-${size} ${className} ${interactive ? 'logo-interactive' : ''}`}>
+  <!-- Logo SVG -->
+  <svg 
+    class={`logo-svg logo-${variant}`}
+    viewBox="0 0 2279 1598" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label={showText ? undefined : alt}
+  >
+    <path d="M2278.37 444.617L949.967 1211.57L949.408 1210.6L948.599 1211.07L972.599 1252.64L1838.97 752.44C1884.75 1042.37 1751.92 1343.59 1482.53 1499.12C1140.58 1696.55 705.348 1586.06 497.902 1253.68L1761.33 521.895C1784.6 565.327 1803.04 610.132 1816.81 655.672L2254.37 403.048L2278.37 444.617ZM2034.16 41.5684L705.761 808.521L705.418 807.929L704.391 808.522L728.391 850.092L1619.33 335.71C1652.96 367.546 1683.93 402.967 1711.62 441.812L1951.99 303.031L1975.99 344.601L622.608 1125.98L473.814 1212.16C473.777 1212.09 473.739 1212.02 473.701 1211.95L24 1471.58L0 1430.02L452.328 1168.86C297.996 830.45 423.389 423.761 752.098 233.98C1007.5 86.5249 1314.93 110.842 1540.63 271.082L2010.16 0L2034.16 41.5684Z" />
+  </svg>
+  
+  <!-- Texte TERRE DIGITALE -->
+  {showText && (
+    <span class={`logo-text logo-text-${variant}`}>TERRE DIGITALE</span>
+  )}
+  
+  {href && <span class="sr-only">Retour à l'accueil - {alt}</span>}
+</Component>
+
+<style>
+  /* Container principal */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* SVG */
+  .logo-svg {
+    flex-shrink: 0;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Texte */
+  .logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  /* Tailles du conteneur */
+  .logo-xs { gap: 8px; }
+  .logo-sm { gap: 10px; }
+  .logo-md { gap: 16px; }
+  .logo-lg { gap: 20px; }
+  .logo-xl { gap: 24px; }
+  .logo-2xl { gap: 28px; }
+  .logo-3xl { gap: 32px; }
+  
+  /* Tailles du SVG */
+  .logo-xs .logo-svg { height: 24px; width: auto; }
+  .logo-sm .logo-svg { height: 32px; width: auto; }
+  .logo-md .logo-svg { height: 48px; width: auto; }
+  .logo-lg .logo-svg { height: 64px; width: auto; }
+  .logo-xl .logo-svg { height: 96px; width: auto; }
+  .logo-2xl .logo-svg { height: 128px; width: auto; }
+  .logo-3xl .logo-svg { height: 200px; width: auto; }
+  
+  /* Tailles du texte */
+  .logo-xs .logo-text { font-size: 8px; }
+  .logo-sm .logo-text { font-size: 10px; }
+  .logo-md .logo-text { font-size: 14px; }
+  .logo-lg .logo-text { font-size: 18px; }
+  .logo-xl .logo-text { font-size: 26px; }
+  .logo-2xl .logo-text { font-size: 34px; }
+  .logo-3xl .logo-text { font-size: 54px; }
+  
+  /* Couleurs du SVG */
+  .logo-primary path { fill: #1E1E1E; }
+  .logo-light path { fill: #F7F7F5; }
+  .logo-secondary path { fill: #FA6147; }
+  .logo-highlight path { fill: #08A890; }
+  .logo-mono-white path { fill: #FFFFFF; }
+  .logo-mono-black path { fill: #000000; }
+  
+  /* Couleurs du texte */
+  .logo-text-primary { color: #1E1E1E; }
+  .logo-text-light { color: #F7F7F5; }
+  .logo-text-secondary { color: #FA6147; }
+  .logo-text-highlight { color: #08A890; }
+  .logo-text-mono-white { color: #FFFFFF; }
+  .logo-text-mono-black { color: #000000; }
+  
+  /* États interactifs */
+  .logo-interactive {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-interactive:hover .logo-svg {
+    transform: scale(1.05);
+  }
+  
+  .logo-interactive:hover .logo-text {
+    opacity: 0.8;
+  }
+  
+  .logo-interactive:active .logo-svg {
+    transform: scale(0.95);
+  }
+  
+  .logo-interactive:focus {
+    outline: 2px solid #08A890;
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  
+  /* Accessibilité */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .logo-md,
+    .logo-lg,
+    .logo-xl,
+    .logo-2xl,
+    .logo-3xl {
+      gap: 12px;
+    }
+    
+    .logo-md .logo-text { font-size: 12px; }
+    .logo-lg .logo-text { font-size: 16px; }
+    .logo-xl .logo-text { font-size: 22px; }
+  }
+</style>

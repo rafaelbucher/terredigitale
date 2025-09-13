@@ -1,6 +1,7 @@
 ---
 // src/pages/design-system.astro
 import MinimalLayout from '../layouts/MinimalLayout.astro';
+import Logo from '../components/Logo.astro';
 ---
 
 <MinimalLayout
@@ -13,6 +14,77 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
       <p class="intro-text">
         Documentation complète de notre système de design basé sur des tokens CSS.
       </p>
+    </section>
+    
+    <!-- Logo Section -->
+    <section class="section">
+      <h2>Logo</h2>
+      <p>Le logo Terre Digitale est disponible en différentes tailles et variantes.</p>
+      
+      <!-- Tailles du logo -->
+      <div class="subsection">
+        <h3>Tailles</h3>
+        <div class="logo-sizes-demo">
+          <div class="logo-size-item">
+            <Logo size="xs" variant="primary" />
+            <code>xs (24px)</code>
+          </div>
+          <div class="logo-size-item">
+            <Logo size="sm" variant="primary" />
+            <code>sm (32px)</code>
+          </div>
+          <div class="logo-size-item">
+            <Logo size="md" variant="primary" />
+            <code>md (48px)</code>
+          </div>
+          <div class="logo-size-item">
+            <Logo size="lg" variant="primary" />
+            <code>lg (64px)</code>
+          </div>
+          <div class="logo-size-item">
+            <Logo size="xl" variant="primary" />
+            <code>xl (96px)</code>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Variantes de couleur -->
+      <div class="subsection">
+        <h3>Variantes de couleur</h3>
+        <div class="logo-variants-demo">
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="primary" />
+            <code>primary</code>
+          </div>
+          <div class="logo-variant-item bg-dark">
+            <Logo size="lg" variant="light" />
+            <code>light</code>
+          </div>
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="secondary" />
+            <code>secondary</code>
+          </div>
+          <div class="logo-variant-item">
+            <Logo size="lg" variant="highlight" />
+            <code>highlight</code>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Usage interactif -->
+      <div class="subsection">
+        <h3>Usage interactif</h3>
+        <div class="logo-interactive-demo">
+          <Logo 
+            size="xl" 
+            variant="primary" 
+            href="/" 
+            interactive={true}
+            class="demo-interactive-logo"
+          />
+          <p><small>Survolez le logo pour voir l'effet interactif</small></p>
+        </div>
+      </div>
     </section>
     
     <!-- Couleurs -->
@@ -100,6 +172,95 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     margin-bottom: var(--space-2xl);
   }
   
+  .subsection {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .subsection h3 {
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Logo demos */
+  .logo-sizes-demo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .logo-size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 1px solid var(--color-neutral-dark);
+    background: var(--color-neutral-lighter);
+    min-width: 150px;
+  }
+  
+  .logo-size-item code {
+    font-family: monospace;
+    font-size: var(--font-size-xs);
+    color: var(--color-primary-light);
+  }
+  
+  .subsection h4 {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-md);
+    color: var(--color-primary-light);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .logo-variants-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .logo-variant-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-neutral-dark);
+    background: var(--color-neutral-lighter);
+  }
+  
+  .logo-variant-item.bg-dark {
+    background: var(--color-primary-dark);
+  }
+  
+  .logo-variant-item code {
+    font-family: monospace;
+    font-size: var(--font-size-sm);
+    color: var(--color-primary-light);
+  }
+  
+  .bg-dark code {
+    color: var(--color-neutral-lighter);
+  }
+  
+  .logo-interactive-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    border: 2px dashed var(--color-highlight);
+    background: var(--color-neutral-lighter);
+  }
+  
+  .demo-interactive-logo {
+    cursor: pointer;
+  }
+  
   /* Couleurs */
   .color-grid {
     display: grid;
@@ -114,7 +275,6 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
   .color-swatch {
     width: 100%;
     height: 80px;
-    border-radius: var(--radius-lg);
     margin-bottom: var(--space-md);
     border: 2px solid var(--color-neutral-dark);
   }
@@ -123,7 +283,6 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     font-family: monospace;
     background: var(--color-neutral);
     padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
     font-size: var(--font-size-sm);
   }
   
@@ -154,7 +313,6 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
   .spacing-item {
     background: var(--color-secondary);
     color: white;
-    border-radius: var(--radius-sm);
     font-weight: var(--font-weight-medium);
   }
   
@@ -165,6 +323,15 @@ import MinimalLayout from '../layouts/MinimalLayout.astro';
     }
     
     .color-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .logo-sizes-demo {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .logo-variants-demo {
       grid-template-columns: 1fr;
     }
   }

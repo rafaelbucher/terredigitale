@@ -1,5 +1,7 @@
 ---
 // src/layouts/BaseLayout.astro
+import Logo from '../components/Logo.astro';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -53,10 +55,24 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
   </head>
   
   <body>
-    <!-- Header optionnel -->
+    <!-- Header avec logo -->
     <header class="site-header">
       <nav class="container">
-        <!-- Navigation sera ajoutée ici -->
+        <div class="navbar">
+          <Logo 
+            href="/" 
+            size="md" 
+            variant="light" 
+            interactive={true}
+            class="navbar-logo"
+          />
+          
+          <!-- Navigation sera ajoutée ici -->
+          <div class="navbar-nav">
+            <a href="/" class="nav-link">Accueil</a>
+            <a href="/design-system" class="nav-link">Design System</a>
+          </div>
+        </div>
       </nav>
     </header>
     
@@ -65,16 +81,40 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
       <slot />
     </main>
     
-    <!-- Footer optionnel -->
+    <!-- Footer avec logo -->
     <footer class="site-footer">
       <div class="container">
-        <!-- Footer sera ajouté ici -->
+        <div class="footer-content">
+          <div class="footer-brand">
+            <Logo 
+              size="lg" 
+              variant="light" 
+              class="footer-logo"
+            />
+            <p class="footer-description">
+              Terre Digitale - Solutions numériques innovantes
+            </p>
+          </div>
+          
+          <div class="footer-links">
+            <div class="footer-section">
+              <h4>Navigation</h4>
+              <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/design-system">Design System</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Terre Digitale. Tous droits réservés.</p>
+        </div>
       </div>
     </footer>
     
     <!-- Scripts optionnels -->
     <script>
-      // Scripts globaux si nécessaire
       console.log('🚀 Site chargé avec le système de design tokens');
     </script>
   </body>
@@ -91,17 +131,106 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
     padding: var(--space-md) 0;
   }
   
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: var(--color-neutral-lighter);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-colors);
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .nav-link:hover {
+    color: var(--color-highlight);
+  }
+  
   .site-main {
-    min-height: calc(100vh - 120px); /* Ajuster selon header/footer */
+    min-height: calc(100vh - 120px);
     padding: var(--space-lg) 0;
   }
   
   .site-footer {
     background-color: var(--color-primary-dark);
     color: var(--color-neutral-lighter);
-    padding: var(--space-xl) 0;
+    padding: var(--space-xl) 0 var(--space-lg);
     margin-top: auto;
     border-top: 1px solid var(--color-primary-lighter);
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .footer-description {
+    color: var(--color-neutral-dark);
+    margin: 0;
+    max-width: 300px;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: var(--space-xl);
+  }
+  
+  .footer-section h4 {
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-section li {
+    margin-bottom: var(--space-sm);
+  }
+  
+  .footer-section a {
+    color: var(--color-neutral-dark);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: var(--transition-colors);
+  }
+  
+  .footer-section a:hover {
+    color: var(--color-highlight);
+  }
+  
+  .footer-bottom {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-primary-lighter);
+    text-align: center;
+  }
+  
+  .footer-bottom p {
+    color: var(--color-neutral-dark);
+    font-size: var(--font-size-sm);
+    margin: 0;
   }
   
   /* Assurer que le body prend toute la hauteur */
@@ -112,5 +241,39 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
   body {
     display: flex;
     flex-direction: column;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      gap: var(--space-md);
+      text-align: center;
+    }
+    
+    .navbar-nav {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .footer-links {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .navbar-nav {
+      gap: var(--space-xs);
+    }
+    
+    .nav-link {
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--font-size-sm);
+    }
   }
 </style>

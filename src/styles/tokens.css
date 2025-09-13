@@ -37,6 +37,50 @@
   --color-highlight-lighter: #30C2B6;
   --color-highlight-dark: #069B82;
   --color-highlight-darker: #058E74;
+ 
+  /* ================================
+  * LOGO TOKENS
+  * ================================ */
+
+  /* Tailles du logo */
+  --logo-size-xs: 24px;        /* Favicon, icônes */
+  --logo-size-sm: 32px;        /* Navigation mobile */
+  --logo-size-md: 48px;        /* Navigation desktop */
+  --logo-size-lg: 64px;        /* En-têtes de section */
+  --logo-size-xl: 96px;        /* Hero, landing pages */
+  --logo-size-2xl: 128px;      /* Pages spéciales */
+  --logo-size-3xl: 200px;      /* Version très large */
+
+  /* Tailles du texte (proportionnelles au logo) */
+  --logo-text-ratio: 0.3;      /* Ratio texte/logo height */
+
+  /* Couleurs du logo */
+  --logo-color-primary: var(--color-primary);           /* Couleur principale (#1E1E1E) */
+  --logo-color-light: var(--color-neutral-lighter);     /* Version claire pour fonds sombres */
+  --logo-color-secondary: var(--color-secondary);       /* Version colorée avec accent */
+  --logo-color-highlight: var(--color-highlight);       /* Version avec couleur highlight */
+  --logo-color-mono-white: #FFFFFF;                     /* Blanc pur */
+  --logo-color-mono-black: #000000;                     /* Noir pur */
+
+  /* Transitions pour le logo */
+  --logo-transition: all var(--duration-normal) var(--ease-out);
+  --logo-hover-scale: 1.05;                             /* Légère augmentation au survol */
+  --logo-active-scale: 0.95;                            /* Légère réduction au clic */
+
+  /* Espacements autour du logo */
+  --logo-margin-inline: var(--space-md);                /* Marge horizontale standard */
+  --logo-margin-block: var(--space-sm);                 /* Marge verticale standard */
+  --logo-gap: var(--space-md);                          /* Espacement entre texte et SVG */
+  --logo-gap-mobile: var(--space-sm);                   /* Espacement réduit sur mobile */
+
+  /* Opacité pour différents états */
+  --logo-opacity-default: 1;
+  --logo-opacity-hover: 0.8;
+  --logo-opacity-disabled: 0.4;
+
+  /* Typographie du texte logo */
+  --logo-text-weight: var(--font-weight-regular);       /* Roboto Regular */
+  --logo-text-spacing: 0.1em;                           /* Letter spacing pour lisibilité */
   
   /* ================================
    * TYPOGRAPHIE
