@@ -14,6 +14,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </div>
   </div>
+
+  <!-- Section Trois Piliers -->
+  <section class="pillars-section">
+    <div class="pillars-container">
+      <h2 class="pillars-title">Nos 3 piliers</h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🌱</div>
+          <h3 class="pillar-name">Inclusion et ouverture</h3>
+          <p class="pillar-description">
+            Rendez vos services accessibles et élargissez votre audience.
+          </p>
+        </div>
+        
+        <div class="pillar-card">
+          <div class="pillar-icon">⚡</div>
+          <h3 class="pillar-name">Sobriété et performance</h3>
+          <p class="pillar-description">
+            Réduisez l'empreinte carbone de vos sites tout en améliorant leur rapidité.
+          </p>
+        </div>
+        
+        <div class="pillar-card">
+          <div class="pillar-icon">🌍</div>
+          <h3 class="pillar-name">Durabilité et agilité</h3>
+          <p class="pillar-description">
+            Construisez des bases solides, faciles à maintenir et à faire évoluer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -29,7 +61,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   /* Hero container prend toute la hauteur disponible */
   .hero-container {
-    min-height: calc(100vh - 120px); /* Ajuster selon la hauteur du header */
+    min-height: calc(100vh - 110px);
     display: flex;
     align-items: flex-end;
     justify-content: start;
@@ -54,10 +86,78 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
+  /* Section Trois Piliers */
+  .pillars-section {
+    background-color: var(--color-neutral-lighter);
+    width: 100%;
+  }
+
+  .pillars-container {
+    padding: var(--space-4xl) calc(var(--space-lg) + var(--space-24)) var(--space-4xl) calc(var(--space-2xl) + var(--space-24));
+  }
+
+  .pillars-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2xl);
+    text-align: left;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .pillar-card {
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary-lighter);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: var(--transition-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .pillar-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .pillar-icon {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-md);
+    line-height: 1;
+  }
+
+  .pillar-name {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-sm);
+    line-height: var(--line-height-snug);
+  }
+
+  .pillar-description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-neutral-light);
+    margin: 0;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .hero-container {
       min-height: calc(100vh - 100px);
+      padding: 0 var(--space-lg);
     }
 
     .hero-content {
@@ -65,12 +165,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     .hero-statement {
-      font-size: var(--font-size-3xl);
+      font-size: var(--font-size-2xl);
       line-height: var(--line-height-normal);
+    }
+
+    .pillars-container {
+      padding: 0 var(--space-lg);
+    }
+
+    .pillars-title {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .pillars-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .pillar-name {
+      font-size: var(--font-size-md);
+    }
+
+    .pillar-description {
+      font-size: var(--font-size-sm);
     }
   }
 
   @media (max-width: 640px) {
+    .hero-container {
+      padding: 0 var(--space-md);
+    }
 
     .hero-content {
       margin-bottom: var(--space-2xl);
@@ -79,12 +204,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .hero-statement {
       font-size: var(--font-size-xl);
     }
+
+    .pillars-container {
+      padding: 0 var(--space-md);
+    }
+
+    .pillars-section {
+      padding: var(--space-3xl) 0;
+    }
+
+    .pillars-title {
+      font-size: var(--font-size-lg);
+    }
+
+    .pillar-icon {
+      font-size: var(--font-size-xl);
+    }
   }
 
   /* Très petits écrans */
   @media (max-width: 375px) {
     .hero-statement {
-      font-size: var(--font-size-3xl);
+      font-size: var(--font-size-lg);
+    }
+
+    .pillars-title {
+      font-size: var(--font-size-md);
     }
   }
 </style>
