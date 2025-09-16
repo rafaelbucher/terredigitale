@@ -41,7 +41,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
       <div class="nav-content">
         <!-- Section des liens principaux - 50% -->
         <div class="nav-links-section">
-          <p class="nav-tagline">Pour un numérique inclusif <br>et durable</p>
           <a href="/services" class="nav-link">Services</a>
           <a href="/ressources" class="nav-link">Ressources</a>
           <a href="/contact" class="nav-link">Contact</a>
@@ -51,7 +50,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
         <!-- Section audit flash - 50% -->
         <div class="audit-flash-section">
           <div class="audit-flash-content">
-            <p class="audit-flash-description">Booster vos performances digitales :</p>
+            <p class="audit-flash-tagline">Pour un numérique inclusif <br>et durable</p>
             <ul class="audit-flash-list">
               <li>🚀 Des chiffres clés clairs et parlants (vitesse, empreinte carbone, accessibilité)</li>
               <li>❌ Les points bloquants qui vous coûtent du trafic et des clients</li>
@@ -126,14 +125,14 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
       const logoText = logoContainer.querySelector('.logo-text') as HTMLElement;
       if (iconPath) {
         if (color === 'secondary') {
-          iconPath.style.fill = 'var(--color-secondary)';
+          iconPath.style.fill = 'var(--color-neutral-lighter)';
         } else {
           iconPath.style.fill = 'var(--color-neutral-lighter)';
         }
       }
       if (logoText) {
         if (color === 'secondary') {
-          logoText.style.color = 'var(--color-secondary)';
+          logoText.style.color = 'var(--color-neutral-lighter)';
         } else {
           logoText.style.color = 'var(--color-neutral-lighter)';
         }
@@ -172,7 +171,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   function animateMenuOpen() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-tagline, .nav-link, .audit-flash-section');
+    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.style.display = 'flex';
     navbarNav.classList.add('menu-open');
     
@@ -198,7 +197,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   function animateMenuClose() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-tagline, .nav-link, .audit-flash-section');
+    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.classList.remove('menu-open');
     
     // Remettre la couleur par défaut du logo
@@ -360,11 +359,11 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
   /* Animation croix quand menu ouvert */
   .menu-toggle-btn.open {
-    color: var(--color-secondary);
+    color: var(--color-neutral-lighter);
   }
 
   .menu-toggle-btn.open .bar {
-    color: var(--color-secondary);
+    color: var(--color-neutral-lighter);
   }
 
   .menu-toggle-btn.open .burger-icon .bar:nth-child(1) {
@@ -388,7 +387,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     min-height: 100svh;
     background: linear-gradient(
       to bottom,
-      var(--color-neutral-lighter) 50%,
+      var(--color-secondary) 50%,
       var(--color-primary) 50%
     );
     z-index: 50;
@@ -435,22 +434,20 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     transform: translateY(30px);
   }
 
-  .nav-tagline {
+  .audit-flash-tagline {
     font-family: var(--font-family-secondary);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
-    color: var(--color-secondary);
-    margin-bottom: var(--space-lg);
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-md);
     line-height: var(--line-height-normal);
     text-align: left;
-    
-    /* État initial - invisible comme les autres éléments */
-    opacity: 0;
-    transform: translateY(30px);
   }
 
   .nav-link {
-    color: var(--color-secondary); /* Orange par défaut */
+    display: block;
+    width: 100%;
+    color: var(--color-neutral-lighter);
     background-color: transparent;
     text-decoration: none;
     font-size: var(--font-size-lg);
@@ -459,7 +456,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     text-transform: uppercase;
     text-align: left;
     padding: var(--space-sm) var(--space-md);
-    border: none;
     cursor: pointer;
     
     /* État initial - invisible */
@@ -471,7 +467,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   }
 
   .nav-link:hover {
-    color: var(--color-neutral-lighter); /* Blanc au survol */
+    color: var(--color-primary); /* Blanc au survol */
   }
 
   .nav-link-home {
@@ -485,7 +481,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
   }
 
   .audit-flash-title {
@@ -505,22 +501,14 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     font-style: italic;
   }
 
-  .audit-flash-description {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-neutral-lighter);
-    margin-bottom: calc(var(--space-sm) * 1.5);
-    line-height: var(--line-height-relaxed);
-  }
-
   .audit-flash-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 var(--space-lg) 0;
+    margin: 0 0 var(--space-sm) 0;
   }
 
   .audit-flash-list li {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-neutral-lighter);
     margin-bottom: var(--space-sm);
     position: relative;
@@ -530,7 +518,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   .audit-flash-download {
     display: inline-block;
     font-size: var(--font-size-xs);
-    color: var(--color-secondary);
+    color: var(--color-neutral-lighter);
     text-decoration: underline;
     transition: color 0.3s ease;
     font-weight: var(--font-weight-medium);
@@ -577,7 +565,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
     .nav-link {
       font-size: var(--font-size-md);
-      padding: var(--space-xs) var(--space-sm);
     }
 
     .audit-flash-title {
@@ -606,7 +593,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
     .nav-link {
       font-size: var(--font-size-sm);
-      margin: var(--space-xs) 0;
     }
 
     .audit-flash-title {
@@ -615,10 +601,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
     .audit-flash-list li {
       font-size: var(--font-size-sm);
-    }
-
-    .audit-flash-description {
-      font-size: var(--font-size-xs);
     }
 
     /* Taille du texte du logo reste fixe */
@@ -649,8 +631,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
     .nav-link {
       font-size: var(--font-size-sm);
-      margin: 2px 0;
-      padding: var(--space-xs) var(--space-sm);
     }
 
     .audit-flash-title {
@@ -663,7 +643,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
       margin-bottom: var(--space-sm);
     }
 
-    .audit-flash-description,
     .audit-flash-list li,
     .audit-flash-download {
       font-size: var(--font-size-xs);
@@ -707,8 +686,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
     .nav-link {
       font-size: var(--font-size-xs);
-      margin: 1px 0;
-      padding: 2px var(--space-xs);
     }
 
     .audit-flash-title {
@@ -721,7 +698,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
       margin-bottom: var(--space-xs);
     }
 
-    .audit-flash-description,
     .audit-flash-list li {
       font-size: 10px;
       line-height: 1.3;
