@@ -33,29 +33,33 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         id="navbar-nav" 
         class={`navbar-nav${showHomeLink ? ' show-home-link' : ''}`}
         style="display: none;">
-      <a href="/" class="nav-link">Terre digitale</a>
-      <a href="/services" class="nav-link">Services</a>
-      <a href="/ressources" class="nav-link">Ressources</a>
-      <a href="/contact" class="nav-link">Contact</a>
-      <a href="/design-system" class="nav-link">Design System</a>
-      
-      <!-- Section Audit flash avec texte descriptif -->
-      <div class="audit-flash-section">
-        <div class="audit-flash-content">
-          <h3 class="audit-flash-title">L'audit flash / Un point de départ</h3>
-          <p class="audit-flash-description">
-            Un diagnostic rapide et concret de votre site ou application :
-          </p>
-          <ul class="audit-flash-list">
-            <li>chiffres clés sur la performance, l'impact carbone et l'accessibilité</li>
-            <li>points bloquants et recommandations immédiates</li>
-            <li>aperçu clair pour engager une transition responsable</li>
-          </ul>
-          <a href="/exemple-audit-gratuit.pdf" class="audit-flash-download" download>
-            Télécharger un exemple d'audit flash
-          </a>
+      <div class="nav-content">
+        <div class="nav-links-section">
+          <a href="/" class="nav-link nav-link-home">Terre digitale</a>
+          <a href="/services" class="nav-link">Services</a>
+          <a href="/ressources" class="nav-link">Ressources</a>
+          <a href="/contact" class="nav-link">Contact</a>
+          <a href="/design-system" class="nav-link">Design System</a>
         </div>
-        <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+        
+        <!-- Section Audit flash avec texte descriptif -->
+        <div class="audit-flash-section">
+          <div class="audit-flash-content">
+            <h3 class="audit-flash-title">L'audit flash / Un point de départ</h3>
+            <p class="audit-flash-description">
+              Un diagnostic rapide et concret de votre site ou application :
+            </p>
+            <ul class="audit-flash-list">
+              <li>chiffres clés sur la performance, l'impact carbone et l'accessibilité</li>
+              <li>points bloquants et recommandations immédiates</li>
+              <li>aperçu clair pour engager une transition responsable</li>
+            </ul>
+            <a href="/exemple-audit-gratuit.pdf" class="audit-flash-download" download>
+              Télécharger un exemple d'audit flash
+            </a>
+          </div>
+          <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+        </div>
       </div>
     </nav>
   </div>
@@ -325,32 +329,47 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 }
 
   .navbar-nav {
-    width: 100%;
-    max-width: var(--container-xl);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background: none;
-    box-shadow: none;
-    width: auto;
-    padding: 0;
-    z-index: 10;
-    padding-left: calc(64px + 8px);
-    padding-top: 28px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Utilisation de height au lieu de svh pour meilleure compatibilité iPhone */
+    min-height: 100vh;
     background: linear-gradient(
-    to bottom,
-    var(--color-neutral-lighter) 50%,
-    var(--color-primary) 50%
-  );
+      to bottom,
+      var(--color-neutral-lighter) 60%,
+      var(--color-primary) 40%
+    );
+    z-index: 50;
+    overflow-y: auto;
+    /* Scroll pour le contenu qui dépasse */
+    -webkit-overflow-scrolling: touch;
   }
 
   .navbar-nav.menu-open {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100svh;
-    width: 100svw;
-    background-color: var(--color-neutral-lighter);
+    display: flex !important;
+  }
+
+  /* Conteneur pour organiser le contenu */
+  .nav-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    padding: 0 var(--space-lg);
+  }
+
+  /* Section des liens principaux */
+  .nav-links-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: calc(64px + var(--space-lg));
+    /* Espace pour le header */
+    padding-bottom: var(--space-xl);
   }
 
   .nav-link {
@@ -359,14 +378,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     text-decoration: none;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-lighter);
-    margin: var(--space-xs) 0;
+    margin: var(--space-sm) 0;
     letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
     text-align: left;
-    padding: var(--space-xs) var(--space-md);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: none; /* Suppression de la bordure */
+    padding: var(--space-sm) var(--space-md);
+    border: none;
     cursor: pointer;
     
     /* État initial - invisible */
@@ -381,19 +398,17 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     color: var(--color-secondary);
   }
 
-  .nav-link:first-child {
-    margin-bottom: 96px;
+  .nav-link-home {
+    margin-bottom: var(--space-2xl);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-lighter);
   }
 
-  /* Styles pour la section audit flash */
+  /* Section audit flash - maintenant en bas */
   .audit-flash-section {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100svw;
-    padding: var(--space-lg);
+    flex-shrink: 0;
+    padding: var(--space-lg) 0 var(--space-xl) 0;
+    border-top: 1px solid var(--color-primary-lighter);
     
     /* État initial - invisible comme les autres éléments */
     opacity: 0;
@@ -402,7 +417,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 
   .audit-flash-content {
     margin-bottom: var(--space-md);
-    width: 100%;
   }
 
   .audit-flash-title {
@@ -417,7 +431,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   .audit-flash-description {
     font-size: var(--font-size-sm);
     color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     line-height: var(--line-height-relaxed);
   }
 
@@ -425,7 +439,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     list-style: none;
     padding: 0;
     margin: 0 0 var(--space-md) 0;
-    width: 100%;
   }
 
   .audit-flash-list li {
@@ -472,11 +485,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     background-color: var(--color-secondary);
     color: var(--color-neutral-lighter) !important;
   }
-
-  .nav-link-modal:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-neutral-lighter) !important;
-  }
   
   /* Styles pour les pages avec home link */
   .navbar-nav.show-home-link .nav-link,
@@ -495,6 +503,56 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     color: var(--color-neutral-lighter);
   }
 
+  /* Responsive pour petits écrans (iPhone SE et similaires) */
+  @media (max-height: 667px) {
+    .nav-links-section {
+      padding-top: calc(64px + var(--space-md));
+      padding-bottom: var(--space-md);
+    }
+
+    .nav-link {
+      font-size: var(--font-size-md);
+      margin: var(--space-xs) 0;
+      padding: var(--space-xs) var(--space-md);
+    }
+
+    .nav-link-home {
+      margin-bottom: var(--space-xl);
+    }
+
+    .audit-flash-section {
+      padding: var(--space-md) 0 var(--space-lg) 0;
+    }
+
+    .audit-flash-title {
+      font-size: var(--font-size-sm);
+    }
+
+    .audit-flash-description,
+    .audit-flash-list li,
+    .audit-flash-download {
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  /* Responsive pour très petits écrans */
+  @media (max-height: 568px) {
+    .nav-link {
+      font-size: var(--font-size-sm);
+      margin: 2px 0;
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .nav-link-home {
+      margin-bottom: var(--space-lg);
+      font-size: var(--font-size-xs);
+    }
+
+    .audit-flash-content {
+      margin-bottom: var(--space-sm);
+    }
+  }
+
   @media (max-width: 768px) {
     .navbar {
       flex-direction: column;
@@ -511,16 +569,50 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   @media (max-width: 640px) {
-    .navbar-nav {
-      gap: var(--space-xs);
-    }
-
     .menu-toggle-text {
       display: none;
     }
 
     .site-header {
       padding: var(--space-md);
+    }
+
+    .nav-content {
+      padding: 0 var(--space-md);
+    }
+  }
+
+  /* Optimisations spécifiques iPhone */
+  @media (max-width: 414px) and (max-height: 896px) {
+    .navbar-nav {
+      /* Forcer la hauteur sur iPhone pour éviter les problèmes de viewport */
+      height: 100vh;
+      min-height: 100vh;
+    }
+
+    .nav-links-section {
+      padding-top: 80px;
+    }
+
+    .nav-link {
+      font-size: var(--font-size-md);
+    }
+  }
+
+  /* iPhone SE et petits écrans */
+  @media (max-width: 375px) and (max-height: 667px) {
+    .nav-links-section {
+      padding-top: 70px;
+      padding-bottom: var(--space-sm);
+    }
+
+    .nav-link {
+      font-size: var(--font-size-sm);
+      margin: 1px 0;
+    }
+
+    .audit-flash-section {
+      padding: var(--space-sm) 0;
     }
   }
 </style>
