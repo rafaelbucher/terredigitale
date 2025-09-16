@@ -1,7 +1,7 @@
 ---
 const { 
   size = 'md',
-  color = 'primary',
+  color = 'light', // Couleur par défaut changée en 'light'
   class: className = '',
   ...props 
 } = Astro.props;
@@ -50,7 +50,28 @@ const colorValue = getColorValue(color);
   {...props}
 >
   <path 
+    class={`icon-path icon-color-${color}`}
     d="M2278.37 444.617L949.967 1211.57L949.408 1210.6L948.599 1211.07L972.599 1252.64L1838.97 752.44C1884.75 1042.37 1751.92 1343.59 1482.53 1499.12C1140.58 1696.55 705.348 1586.06 497.902 1253.68L1761.33 521.895C1784.6 565.327 1803.04 610.132 1816.81 655.672L2254.37 403.048L2278.37 444.617ZM2034.16 41.5684L705.761 808.521L705.418 807.929L704.391 808.522L728.391 850.092L1619.33 335.71C1652.96 367.546 1683.93 402.967 1711.62 441.812L1951.99 303.031L1975.99 344.601L622.608 1125.98L473.814 1212.16C473.777 1212.09 473.739 1212.02 473.701 1211.95L24 1471.58L0 1430.02L452.328 1168.86C297.996 830.45 423.389 423.761 752.098 233.98C1007.5 86.5249 1314.93 110.842 1540.63 271.082L2010.16 0L2034.16 41.5684Z"
     fill={colorValue}
   />
 </svg>
+
+<style>
+  .icon-path {
+    transition: fill 0.3s ease;
+  }
+
+  .icon-color-light path {
+    fill: var(--color-neutral-lighter);
+  }
+
+  .icon-color-secondary path {
+    fill: var(--color-secondary);
+  }
+
+  /* États pour l'icône quand le menu est ouvert */
+  .icon.menu-open .icon-path,
+  .icon.menu-open path {
+    fill: var(--color-secondary) !important;
+  }
+</style>
