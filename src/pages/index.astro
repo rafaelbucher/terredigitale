@@ -48,7 +48,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* Styles spécifiques à la page d'accueil */
+  /* Background global de la page, header et footer en primary */
+  :global(body) {
+    background-color: var(--color-primary) !important;
+  }
+
+  :global(.site-header) {
+    background-color: var(--color-primary) !important;
+    border-bottom: none;
+  }
+
+  :global(.site-footer) {
+    background-color: var(--color-primary) !important;
+    border-top: none;
+  }
+
+  /* Container du header et footer en full width */
+  :global(.site-header .container) {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 var(--space-md);
+  }
+
+  :global(.site-footer .container) {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 var(--space-md);
+  }
+
+  /* Assurer que le contenu n'est pas coupé */
+  :global(.site-main) {
+    min-height: auto !important;
+    padding-bottom: var(--space-4xl) !important;
+  }
+
+  /* Container en full width */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 var(--space-md);
+  }
   .hero {
     text-align: center;
     padding: var(--space-4xl) 0;
@@ -57,13 +99,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero-title {
     font-size: var(--font-size-5xl);
     margin-bottom: var(--space-lg);
-    color: var(--color-primary);
+    color: var(--color-neutral-lighter); /* Texte clair sur fond sombre */
     background-clip: text;
   }
   
   .hero-description {
     font-size: var(--font-size-xl);
-    color: var(--color-primary); /* Couleur moins contrastée pour la description */
+    color: var(--color-neutral-light); /* Couleur plus claire pour la description sur fond sombre */
     max-width: 600px;
     margin: 0 auto var(--space-xl);
   }
@@ -84,11 +126,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   
   .features-grid .card {
     text-align: center;
+    background-color: var(--color-neutral-lighter); /* Cartes claires sur fond sombre */
+    color: var(--color-primary); /* Texte sombre dans les cartes claires */
   }
   
   .features-grid h3 {
     font-size: var(--font-size-xl);
     margin-bottom: var(--space-md);
+  }
+
+  /* Titre de section adapté au fond sombre */
+  .features h2 {
+    color: var(--color-neutral-lighter);
   }
   
   /* Responsive */
