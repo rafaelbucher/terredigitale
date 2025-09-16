@@ -1,0 +1,308 @@
+---
+// filepath: /Users/admin/Desktop/terredigitale/src/components/Header.astro
+import Icon from './Icon.astro';
+
+const { pathname = "/" } = Astro.props;
+const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(pathname);
+---
+
+<header class="site-header">
+  <div class="navbar-container">
+    <div class="navbar">
+      {showHomeLink ? (
+        <a href="/" class="site-logo-link" aria-label="Accueil">
+          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+        </a>
+      ) : (
+        <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+      )}
+    <button
+        id="menu-toggle"
+        class={`menu-toggle-btn${showHomeLink ? ' menu-toggle-btn-orange' : ' menu-toggle-btn-white'}`}
+        type="button"
+        >
+        <span id="menu-toggle-text">Menu</span>
+        <span class="burger-icon" aria-hidden="true">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </span>
+      </button>
+    </div>
+    <nav 
+        id="navbar-nav" 
+        class={`navbar-nav${showHomeLink ? ' show-home-link' : ''}`}
+        style="display: none;">
+      <a href="/services" class="nav-link">Services</a>
+      <a href="/ressources" class="nav-link">Ressources</a>
+      <a href="/contact" class="nav-link">Contact</a>
+      <a href="/design-system" class="nav-link">Design System</a>
+      <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+    </nav>
+  </div>
+</header>
+
+<!-- Modale Audit flash -->
+<div id="audit-flash-modal" class="audit-flash-modal" style="display:none;">
+  <div class="audit-flash-content">
+    <h2>Audit flash</h2>
+    <p>Votre audit numérique express commence ici.</p>
+    <button id="close-audit-flash" class="close-btn">Fermer</button>
+  </div>
+</div>
+
+<script>
+  // Audit flash modal
+  const btn = document.getElementById('audit-flash-btn');
+  const modal = document.getElementById('audit-flash-modal');
+  const closeBtn = document.getElementById('close-audit-flash');
+
+  btn?.addEventListener('click', () => {
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (modal && modal.style.display === 'flex' && e.key === 'Escape') {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Menu toggle
+  const toggleBtn = document.getElementById('menu-toggle');
+  const navbarNav = document.getElementById('navbar-nav');
+  const toggleText = document.getElementById('menu-toggle-text');
+
+  function updateToggle() {
+    if (navbarNav && toggleText) {
+      if (navbarNav.style.display === 'flex') {
+        toggleText.textContent = 'Fermer';
+      } else {
+        toggleText.textContent = 'Menu';
+      }
+    }
+  }
+    
+    toggleBtn?.addEventListener('click', () => {
+    if (navbarNav) {
+        const isOpen = navbarNav.style.display === 'flex';
+        navbarNav.style.display = isOpen ? 'none' : 'flex';
+        updateToggle();
+        toggleBtn.classList.toggle('open', !isOpen);
+    }
+    });
+
+  navbarNav?.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navbarNav) {
+        navbarNav.style.display = 'none';
+        updateToggle();
+      }
+    });
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-navbar);
+    padding: var(--space-lg);
+    background: var(--color-primary);
+  }
+
+  .site-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .navbar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+  }
+.menu-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  position: absolute;
+  top: calc(var(--space-xs) * 2.5);
+    right: 0;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-lighter);
+  border: none;
+  cursor: pointer;
+  padding: calc(var(--space-xs) * 2) var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  z-index: 100;
+  color: var(--color-neutral-lighter);
+  background-color: transparent;
+  border: 1px solid var(--color-neutral-lighter);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.menu-toggle-btn .burger-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-left: var(--space-xs);
+  margin-top: -6px;
+  transition: all 0.3s;
+}
+
+.menu-toggle-btn .bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transition: all 0.3s;
+}
+
+.menu-toggle-btn .bar:nth-child(1) {
+  top: 4px;
+}
+.menu-toggle-btn .bar:nth-child(2) {
+  top: 10px;
+}
+.menu-toggle-btn .bar:nth-child(3) {
+  top: 16px;
+}
+
+/* Animation croix quand menu ouvert */
+.menu-toggle-btn.open .burger-icon .bar:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+.menu-toggle-btn.open .burger-icon .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle-btn.open .burger-icon .bar:nth-child(3) {
+  top: 10px;
+  transform: rotate(-45deg);
+}
+  .navbar-nav {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: var(--space-md) auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: none;
+    box-shadow: none;
+    width: auto;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .nav-link {
+    color: var(--color-neutral-lighter);
+    background-color: transparent;
+    text-decoration: none;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-lighter);
+    transition: var(--transition-colors);
+    padding: calc(var(--space-xs) * 2) var(--space-md) !important;
+    margin: var(--space-xs) 0;
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    text-align: right;
+    padding: var(--space-xs) var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--color-neutral-lighter);
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: var(--color-secondary);
+  }
+    .navbar-nav.show-home-link .nav-link,
+    .navbar-nav.show-home-link .audit-flash-btn {
+        color: var(--color-secondary);
+        border-color: var(--color-secondary);
+        transition: color 0.5s, border-color 0.5s;
+    }
+
+    .navbar-nav.show-home-link .nav-link:hover,
+    .navbar-nav.show-home-link .audit-flash-btn:hover {
+        color: var(--color-neutral-lighter);
+        border-color: var(--color-neutral-lighter);
+    }
+
+  .audit-flash-modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-primary);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audit-flash-content {
+    color: var(--color-neutral-lighter);
+    text-align: center;
+    max-width: 90vw;
+  }
+
+  .close-btn {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background: var(--color-highlight);
+    color: var(--color-neutral-lighter);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      gap: var(--space-md);
+      text-align: center;
+    }
+    .navbar-nav {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .site-header {
+      padding: var(--space-lg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .navbar-nav {
+      gap: var(--space-xs);
+    }
+    .nav-link {
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--font-size-sm);
+    }
+    .site-header {
+      padding: var(--space-md);
+    }
+  }
+</style>

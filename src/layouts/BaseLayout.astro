@@ -1,6 +1,6 @@
 ---
 // src/layouts/BaseLayout.astro
-import Logo from '../components/Logo.astro';
+import Header from '../components/Header.astro';
 // Import direct du CSS - IMPORTANT pour le build
 import '../styles/global.css';
 
@@ -19,6 +19,10 @@ const {
 } = Astro.props;
 
 const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.url.pathname, Astro.site);
+
+const pathname = Astro.url.pathname;
+const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname);
+
 ---
 
 <!DOCTYPE html>
@@ -55,23 +59,7 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
   
   <body>
     <!-- Header avec logo -->
-    <header class="site-header">
-      <div class="navbar">
-        <Logo 
-          href="/" 
-          size="md" 
-          variant="light" 
-          interactive={true}
-          class="navbar-logo"
-        />
-        
-        <!-- Navigation sera ajoutée ici -->
-        <div class="navbar-nav">
-          <a href="/" class="nav-link">Accueil</a>
-          <a href="/design-system" class="nav-link">Design System</a>
-        </div>
-      </div>
-    </header>
+    <Header pathname={Astro.url.pathname} />
     
     <!-- Contenu principal - COMMENTÉ POUR FOCUS SUR HEADER
     <main class="site-main">
@@ -110,49 +98,110 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
     </footer>
     -->
     
-    <!-- Scripts optionnels -->
-    <script>
-      console.log('🚀 Site chargé avec le système de design tokens');
-    </script>
+    <!-- Modale Audit flash -->
+    <div id="audit-flash-modal" class="audit-flash-modal" style="display:none;">
+      <div class="audit-flash-content">
+        <h2>Audit flash</h2>
+        <p>Votre audit numérique express commence ici.</p>
+        <button id="close-audit-flash" class="close-btn">Fermer</button>
+      </div>
+    </div>
+
   </body>
 </html>
 
 <style>
   /* Styles spécifiques au layout avec padding --space-32 */
   .site-header {
-    background-color: var(--color-primary-light);
     position: sticky;
     top: 0;
     z-index: var(--z-navbar);
-    padding: var(--space-md);
+    padding: var(--space-lg);
   }
-  
-  .navbar {
-    display: flex;
+  /* Menu vertical en overlay */
+  .site-logo-link {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
+    text-decoration: none;
   }
-  
+
+  .menu-toggle-btn {
+    position: absolute;
+    top: var(--space-xl);
+    right: var(--space-lg);
+    background: var(--color-primary);
+    color: var(--color-neutral-lighter);
+    border: none;
+    cursor: pointer;
+    padding: var(--space-xs) var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+  }
+
   .navbar-nav {
     display: flex;
+    flex-direction: column;
     gap: var(--space-sm);
-    align-items: center;
+    align-items: flex-end;
+    position: absolute;
+    right: var(--space-lg);
+    background: none;
+    box-shadow: none;
+    width: auto;
+    padding: 0;
+    z-index: 1;
   }
-  
+  /*
+  .navbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    box-shadow: none;
+    height: auto;
+    width: auto;
+    padding: 0;
+    z-index: 10;
+  }
+  */
+
   .nav-link {
     color: var(--color-neutral-lighter);
     text-decoration: none;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-light);
     transition: var(--transition-colors);
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+    letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
+    text-align: right;
   }
-  
+
   .nav-link:hover {
     color: var(--color-highlight);
+  }
+
+  .audit-flash-btn {
+    color: var(--color-accent);
+    border: none;
+    background-color: var(--color-neutral-lighter);
+    cursor: pointer;
+    padding: var(--space-xs) var(--space-md);
+    transition: var(--transition-colors);
   }
   
   /* FOOTER STYLES - COMMENTÉ POUR FOCUS SUR HEADER
@@ -240,6 +289,7 @@ const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.
   /* Assurer que le body prend toute la hauteur */
   html, body {
     height: 100%;
+    background-color: var(--color-primary);
   }
   
   body {
