@@ -45,16 +45,13 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         <!-- Section audit flash - 50% -->
         <div class="audit-flash-section">
           <div class="audit-flash-content">
-            <h3 class="audit-flash-title">L'audit flash</h3>
-            <p class="audit-flash-subtitle">Un point de départ</p>
-            <p class="audit-flash-description">
-              Un diagnostic rapide et concret de votre site ou application :
-            </p>
+            <p class="audit-flash-description">Identifiez ce qui booste ou freine vos performances digitales :</p>
             <ul class="audit-flash-list">
-              <li>Chiffres clés : performance, impact carbone, accessibilité</li>
-              <li>Points bloquants et recommandations immédiates</li>
-              <li>Aperçu clair pour engager une transition responsable</li>
+              <li>🚀 Des chiffres clés clairs et parlants (vitesse, empreinte carbone, accessibilité)</li>
+              <li>❌ Les points bloquants qui vous coûtent du trafic et des clients</li>
+              <li>✅ Des recommandations concrètes pour agir dès maintenant</li>
             </ul>
+            <p class="audit-flash-description">✨ Passez à l’action et démarquez-vous avec un numérique plus performant et responsable.</p>  
             <a href="/exemple-audit-gratuit.pdf" class="audit-flash-download" download>
               Télécharger un exemple d'audit flash
             </a>
@@ -434,7 +431,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   .audit-flash-subtitle {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-light);
     color: var(--color-neutral-light);
     margin-bottom: var(--space-md);
@@ -442,9 +439,10 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   .audit-flash-description {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
     color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-md);
+    margin-bottom: calc(var(--space-sm) * 1.5);
     line-height: var(--line-height-relaxed);
   }
 
@@ -458,22 +456,13 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     font-size: var(--font-size-sm);
     color: var(--color-neutral-lighter);
     margin-bottom: var(--space-sm);
-    padding-left: var(--space-md);
     position: relative;
     line-height: var(--line-height-normal);
   }
 
-  .audit-flash-list li::before {
-    content: "•";
-    color: var(--color-secondary);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-  }
-
   .audit-flash-download {
     display: inline-block;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-secondary);
     text-decoration: underline;
     transition: color 0.3s ease;
@@ -570,11 +559,14 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .audit-flash-title {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-sm);
     }
 
-    .audit-flash-description,
     .audit-flash-list li {
+      font-size: var(--font-size-sm);
+    }
+
+    .audit-flash-description {
       font-size: var(--font-size-xs);
     }
   }
