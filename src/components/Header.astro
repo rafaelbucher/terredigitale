@@ -364,7 +364,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
     align-items: flex-start;
     min-height: 50svh;
     padding: var(--space-xl) 0;
@@ -706,7 +706,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .nav-content {
-      padding: 0 var(--space-sm);
+      padding: 0 calc(var(--space-md) * 1.5);
     }
   }
 
@@ -722,7 +722,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .nav-links-section {
-      padding-top: 80px;
       min-height: 48svh;
     }
 
@@ -737,7 +736,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .nav-links-section {
-      padding-top: 70px;
       min-height: 45svh;
     }
 
@@ -761,7 +759,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .nav-links-section {
       flex: 0 0 auto;
       min-height: auto;
-      padding: var(--space-lg) 0 var(--space-md) 0;
     }
 
     .audit-flash-section {
