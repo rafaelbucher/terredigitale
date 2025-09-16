@@ -12,12 +12,12 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     <div class="navbar">
       {showHomeLink ? (
         <a href="/" id="site-logo-toggle" class="site-logo-link" aria-label="Retour à l'accueil">
-          <Icon size="lg" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
           <span class="logo-text">TERRE DIGITALE</span>
         </a>
       ) : (
         <div id="site-logo-toggle" class="site-logo-container">
-          <Icon size="lg" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
           <span class="logo-text">TERRE DIGITALE</span>
         </div>
       )}
@@ -257,7 +257,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   .site-logo-container {
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Marge fixe de 8px */
+    gap: 16px; /* Marge fixe de 8px */
     text-decoration: none;
     z-index: 100;
     cursor: pointer;
@@ -305,7 +305,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     align-items: center;
     gap: var(--space-xs);
     position: absolute;
-    top: 19px;
+    top: 10px;
     right: 6px;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-lighter);
@@ -405,7 +405,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     flex-direction: column;
     width: 100%;
     min-height: 100svh;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-xs);
   }
 
   /* Section des liens principaux - 50% de l'espace */
@@ -455,7 +455,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
     text-align: left;
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-md) var(--space-sm) 0;
     cursor: pointer;
     
     /* État initial - invisible */
@@ -618,7 +618,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     }
 
     .nav-links-section {
-      padding: var(--space-md) 0;
+      padding: var(--space-md) 0 0 0;
       min-height: 45svh;
       flex-shrink: 0;
     }
