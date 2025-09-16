@@ -153,6 +153,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
+  .pillars-section {
+    transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: background-color;
+    transform: translateZ(0); /* Force GPU acceleration */
+  }
+
+  /* Ajustements pour le texte sur fond orange */
+  html.scrolled .pillars-section {
+    /* Ces styles seront appliqués en plus du JavaScript */
+  }
+
+  html.scrolled .pillars-title {
+    color: var(--color-primary) !important; /* Titre sombre sur fond orange */
+  }
+
+  html.scrolled .pillar-card {
+    /* Cartes avec fond légèrement différent pour le contraste */
+    background-color: rgba(30, 30, 30, 0.9) !important;
+    border-color: rgba(30, 30, 30, 0.3);
+  }
+
+  html.scrolled .pillar-name {
+    color: var(--color-neutral-lighter) !important; /* Texte clair dans les cartes */
+  }
+
+  html.scrolled .pillar-description {
+    color: var(--color-neutral-light) !important; /* Description claire dans les cartes */
+  }
   /* Responsive */
   @media (max-width: 768px) {
     .hero-container {

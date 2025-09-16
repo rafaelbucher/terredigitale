@@ -242,6 +242,129 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
       }
     });
   });
+  
+  // Version corrigée pour TypeScript - à ajouter dans Header.astro
+// Copiez ce code dans une balise <script> à la fin de votre Header.astro
+
+(function() {
+  'use strict';
+  
+  // Types pour les couleurs RGB
+  type RGBArray = [number, number, number];
+  
+  interface ColorConfig {
+    from: RGBArray;
+    to: RGBArray;
+  }
+  
+  // Configuration des couleurs - TOUTES vers #FC937F
+  const COLORS: Record<string, ColorConfig> = {
+    header: {
+      from: [30, 30, 30],      // #1E1E1E (noir)
+      to: [252, 147, 127]      // #FC937F (orange clair)
+    },
+    body: {
+      from: [30, 30, 30],      // #1E1E1E (noir)
+      to: [252, 147, 127]      // #FC937F (orange clair)
+    },
+    sections: {
+      from: [30, 30, 30],      // #1E1E1E (noir) 
+      to: [252, 147, 127]      // #FC937F (orange clair)
+    }
+  };
+
+  let ticking = false;
+
+  function interpolateColor(from: RGBArray, to: RGBArray, factor: number): string {
+    const r = Math.round(from[0] + factor * (to[0] - from[0]));
+    const g = Math.round(from[1] + factor * (to[1] - from[1]));
+    const b = Math.round(from[2] + factor * (to[2] - from[2]));
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  function easeOutCubic(t: number): number {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function updateColors(): void {
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight || 600;
+    
+    const progress = Math.min(scrollY / windowHeight, 1);
+    const easedProgress = easeOutCubic(progress);
+    
+    // Header
+    const header = document.querySelector('.site-header') as HTMLElement | null;
+    if (header) {
+      header.style.backgroundColor = interpolateColor(
+        COLORS.header.from, 
+        COLORS.header.to, 
+        easedProgress
+      );
+    }
+    
+    // Body
+    const body = document.body as HTMLElement;
+    if (body) {
+      body.style.backgroundColor = interpolateColor(
+        COLORS.body.from, 
+        COLORS.body.to, 
+        easedProgress
+      );
+    }
+    
+    // Sections (.pillars-section)
+    const sections = document.querySelectorAll('.pillars-section') as NodeListOf<HTMLElement>;
+    sections.forEach(function(section: HTMLElement) {
+      if (section) {
+        section.style.backgroundColor = interpolateColor(
+          COLORS.sections.from, 
+          COLORS.sections.to, 
+          easedProgress
+        );
+      }
+    });
+    
+    // Classe pour les états CSS
+    if (progress > 0.1) {
+      document.documentElement.classList.add('scrolled');
+    } else {
+      document.documentElement.classList.remove('scrolled');
+    }
+  }
+
+  function onScroll(): void {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        updateColors();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  function init(): void {
+    // Vérifications de sécurité
+    if (typeof window === 'undefined' || 
+        typeof document === 'undefined' || 
+        typeof requestAnimationFrame === 'undefined') {
+      return;
+    }
+
+    // Écouter le scroll (plus de fallback IE8)
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Initialiser
+    updateColors();
+  }
+
+  // Auto-initialisation
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 
 <style>
@@ -250,7 +373,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     top: 0;
     z-index: var(--z-navbar);
     padding: var(--space-lg);
-    background: var(--color-primary);
   }
 
   .site-logo-link,
@@ -318,7 +440,7 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    background: transparent;
+    background-color: transparent;
     color: var(--color-neutral-lighter);
   }
 
@@ -348,8 +470,12 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     left: 0;
     width: 100%;
     height: 1px;
-    background: currentColor;
+    background-color: white;
     transition: all 0.3s;
+  }
+
+  .menu-toggle-btn:hover .bar {
+    background-color: var(--color-secondary);
   }
 
   .menu-toggle-btn .bar:nth-child(1) {
@@ -367,7 +493,9 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     color: var(--color-neutral-lighter);
   }
 
-  .menu-toggle-btn.open .bar {
+  .menu-toggle-btn.open .bar,
+  .menu-toggle-btn .open .bar,
+  .menu-toggle-btn:hover .open .bar{
     color: var(--color-neutral-lighter);
   }
 
@@ -456,7 +584,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     display: block;
     width: 100%;
     color: var(--color-neutral-lighter);
-    background-color: transparent;
     text-decoration: none;
     font-family: var(--font-family-primary);
     text-transform: uppercase;
@@ -539,7 +666,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   }
 
   .nav-link-modal {
-    background-color: var(--color-secondary);
     border: 1px solid var(--color-secondary);
     transition: background-color 0.3s ease, color 0.3s ease;
     padding: var(--space-sm) var(--space-lg);
@@ -555,7 +681,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
   }
 
   .nav-link-modal:hover {
-    background-color: var(--color-secondary-dark);
     color: var(--color-neutral-lighter) !important;
   }
   
