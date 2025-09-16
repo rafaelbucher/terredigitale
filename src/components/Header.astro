@@ -58,7 +58,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
               Télécharger un exemple d'audit flash
             </a>
           </div>
-          <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+          <button class="nav-link nav-link-button nav-link-modal" type="button">Demander un audit flash</button>
         </div>
       </div>
     </nav>
@@ -338,8 +338,8 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     min-height: 100vh;
     background: linear-gradient(
       to bottom,
-      var(--color-neutral-lighter) 60%,
-      var(--color-primary) 40%
+      var(--color-neutral-lighter) 52%,
+      var(--color-primary) 48%
     );
     z-index: 50;
     overflow-y: auto;
@@ -369,7 +369,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     align-items: flex-start;
     padding-top: calc(64px + var(--space-lg));
     /* Espace pour le header */
-    padding-bottom: var(--space-xl);
   }
 
   .nav-link {
@@ -399,16 +398,16 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   .nav-link-home {
-    margin-bottom: var(--space-2xl);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-lighter);
+    position: absolute;
+    top: 20px;
+    left: 72px;
   }
 
   /* Section audit flash - maintenant en bas */
   .audit-flash-section {
     flex-shrink: 0;
-    padding: var(--space-lg) 0 var(--space-xl) 0;
-    border-top: 1px solid var(--color-primary-lighter);
+    padding: 0 0 var(--space-xl) 0;
+    margin: 0 var(--space-sm);
     
     /* État initial - invisible comme les autres éléments */
     opacity: 0;
@@ -471,18 +470,19 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   .nav-link-modal {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     border: 1px solid var(--color-secondary);
-    color: var(--color-secondary) !important;
+    color: var(--color-neutral-lighter) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin: 0;
     padding: var(--space-sm) var(--space-md);
     width: 100%;
     text-align: center;
+    text-transform: none;
   }
 
   .nav-link-modal:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-dark);
     color: var(--color-neutral-lighter) !important;
   }
   
@@ -507,7 +507,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   @media (max-height: 667px) {
     .nav-links-section {
       padding-top: calc(64px + var(--space-md));
-      padding-bottom: var(--space-md);
     }
 
     .nav-link {
@@ -517,7 +516,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .nav-link-home {
-      margin-bottom: var(--space-xl);
     }
 
     .audit-flash-section {
@@ -544,7 +542,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
 
     .nav-link-home {
-      margin-bottom: var(--space-lg);
       font-size: var(--font-size-xs);
     }
 
@@ -603,7 +600,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   @media (max-width: 375px) and (max-height: 667px) {
     .nav-links-section {
       padding-top: 70px;
-      padding-bottom: var(--space-sm);
     }
 
     .nav-link {
