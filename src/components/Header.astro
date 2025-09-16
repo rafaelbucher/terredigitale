@@ -21,12 +21,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         class="menu-toggle-btn"
         type="button"
         >
-        <span id="menu-toggle-text">Menu</span>
         <span class="burger-icon" aria-hidden="true">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </span>
+        <span id="menu-toggle-text">Menu</span>
       </button>
     </div>
     <nav 
@@ -171,7 +171,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   width: 16px;
   height: 16px;
   position: relative;
-  margin-left: var(--space-xs);
+  margin-right: var(--space-xs);
   margin-top: -6px;
   transition: all 0.3s;
 }
@@ -197,6 +197,16 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 }
 
 /* Animation croix quand menu ouvert */
+
+.menu-toggle-btn.open {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+.menu-toggle-btn.open .bar {
+    color: var(--color-secondary);
+}
+
 .menu-toggle-btn.open .burger-icon .bar:nth-child(1) {
   top: 10px;
   transform: rotate(45deg);
