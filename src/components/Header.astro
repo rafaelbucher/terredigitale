@@ -38,7 +38,25 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
       <a href="/ressources" class="nav-link">Ressources</a>
       <a href="/contact" class="nav-link">Contact</a>
       <a href="/design-system" class="nav-link">Design System</a>
-      <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+      
+      <!-- Section Audit flash avec texte descriptif -->
+      <div class="audit-flash-section">
+        <div class="audit-flash-content">
+          <h3 class="audit-flash-title">L'audit flash / Un point de départ</h3>
+          <p class="audit-flash-description">
+            Un diagnostic rapide et concret de votre site ou application :
+          </p>
+          <ul class="audit-flash-list">
+            <li>chiffres clés sur la performance, l'impact carbone et l'accessibilité</li>
+            <li>points bloquants et recommandations immédiates</li>
+            <li>aperçu clair pour engager une transition responsable</li>
+          </ul>
+          <a href="/exemple-audit-gratuit.pdf" class="audit-flash-download" download>
+            Télécharger un exemple d'audit flash gratuit
+          </a>
+        </div>
+        <button class="nav-link nav-link-button nav-link-modal" type="button">Audit flash</button>
+      </div>
     </nav>
   </div>
 </header>
@@ -124,7 +142,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   function animateMenuOpen() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-link');
+    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.style.display = 'flex';
     navbarNav.classList.add('menu-open');
     
@@ -150,7 +168,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   function animateMenuClose() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-link');
+    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.classList.remove('menu-open');
     
     // Remettre la couleur par défaut de l'icône
@@ -363,26 +381,103 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     color: var(--color-secondary);
   }
 
-
   .nav-link:first-child {
     margin-bottom: 96px;
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-lighter);
   }
 
-  .nav-link-modal {
+  /* Styles pour la section audit flash */
+  .audit-flash-section {
     position: absolute;
-    bottom: 32px;
+    bottom: 0;
+    left: 0;
+    width: 100svw;
+    padding: var(--space-lg);
+    
+    /* État initial - invisible comme les autres éléments */
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .audit-flash-content {
+    margin-bottom: var(--space-md);
+    width: 100%;
+  }
+
+  .audit-flash-title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-sm);
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .audit-flash-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-lg);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .audit-flash-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md) 0;
+    width: 100%;
+  }
+
+  .audit-flash-list li {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-lighter);
+    margin-bottom: var(--space-xs);
+    padding-left: var(--space-sm);
+    position: relative;
+    line-height: var(--line-height-normal);
+  }
+
+  .audit-flash-list li::before {
+    content: "•";
+    color: var(--color-secondary);
+    position: absolute;
+    left: 0;
+  }
+
+  .audit-flash-download {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .audit-flash-download:hover {
+    color: var(--color-secondary-dark);
+  }
+
+  .nav-link-modal {
     background-color: var(--color-primary);
-    border: 1px solid var(--color-secondary);;
+    border: 1px solid var(--color-secondary);
     color: var(--color-secondary) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin: 0;
-    margin-top: 64px;
-    margin-left: var(--space-8);
-    padding: var(--space-6) var( --space-12);
-    
+    padding: var(--space-sm) var(--space-md);
+    width: 100%;
+    text-align: center;
   }
+
+  .nav-link-modal:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-lighter) !important;
+  }
+
+  .nav-link-modal:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-lighter) !important;
+  }
+  
   /* Styles pour les pages avec home link */
   .navbar-nav.show-home-link .nav-link,
   .navbar-nav.show-home-link .nav-link-button {
@@ -391,6 +486,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 
   .navbar-nav.show-home-link .nav-link:hover,
   .navbar-nav.show-home-link .nav-link-button:hover {
+    color: var(--color-neutral-lighter);
+  }
+
+  .navbar-nav.show-home-link .audit-flash-title,
+  .navbar-nav.show-home-link .audit-flash-description,
+  .navbar-nav.show-home-link .audit-flash-list li {
     color: var(--color-neutral-lighter);
   }
 
