@@ -4,51 +4,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Accueil - Mon Site Astro"
-  description="Bienvenue sur mon site développé avec Astro et un système de design tokens"
+  title="Accueil - Terre Digitale"
+  description="Nous croyons en un numérique qui allie performance, responsabilité et accessibilité. Avec Terre Digitale, transformez vos produits en leviers de changement positif."
 >
-  <div class="container">
-    <section class="hero section">
-      <div class="hero-content">
-        <h1 class="hero-title">Bienvenue sur mon site</h1>
-        <p class="hero-description">
-          Site développé avec Astro et un système de design tokens complet
-        </p>
-        <div class="hero-actions">
-          <a href="/design-system" class="btn btn-primary">
-            Voir le Design System
-          </a>
-          <a href="#features" class="btn btn-secondary">
-            En savoir plus
-          </a>
-        </div>
-      </div>
-    </section>
-    
-    <section id="features" class="features section">
-      <h2>Fonctionnalités</h2>
-      <div class="features-grid">
-        <div class="card">
-          <h3 class="text-secondary">🎨 Design System</h3>
-          <p>Système de tokens complet avec couleurs, typographie, espacements et plus.</p>
-        </div>
-        
-        <div class="card">
-          <h3 class="text-highlight">⚡ Performance</h3>
-          <p>Optimisé avec Astro pour des performances exceptionnelles.</p>
-        </div>
-        
-        <div class="card">
-          <h3 class="text-primary">📱 Responsive</h3>
-          <p>Interface adaptée à tous les écrans grâce aux breakpoints.</p>
-        </div>
-      </div>
-    </section>
+  <div class="hero-container">
+    <div class="hero-content">
+      <p class="hero-statement">
+        Nous croyons en un numérique qui allie performance, responsabilité et accessibilité. Avec Terre Digitale, transformez vos produits en leviers de changement positif.
+      </p>
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  /* Background global de la page, header et footer en primary */
+  /* Background global de la page */
   :global(body) {
     background-color: var(--color-primary) !important;
   }
@@ -58,105 +27,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-bottom: none;
   }
 
-  :global(.site-footer) {
-    background-color: var(--color-primary) !important;
-    border-top: none;
-  }
-
-  /* Container du header et footer en full width */
-  :global(.site-header .container) {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0 var(--space-md);
-  }
-
-  :global(.site-footer .container) {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0 var(--space-md);
-  }
-
-  /* Assurer que le contenu n'est pas coupé */
-  :global(.site-main) {
-    min-height: auto !important;
-    padding-bottom: var(--space-4xl) !important;
-  }
-
-  /* Container en full width */
-  .container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0 var(--space-md);
-  }
-  .hero {
-    text-align: center;
-    padding: var(--space-4xl) 0;
-  }
-  
-  .hero-title {
-    font-size: var(--font-size-5xl);
-    margin-bottom: var(--space-lg);
-    color: var(--color-neutral-lighter); /* Texte clair sur fond sombre */
-    background-clip: text;
-  }
-  
-  .hero-description {
-    font-size: var(--font-size-xl);
-    color: var(--color-neutral-light); /* Couleur plus claire pour la description sur fond sombre */
-    max-width: 600px;
-    margin: 0 auto var(--space-xl);
-  }
-  
-  .hero-actions {
+  /* Hero container prend toute la hauteur disponible */
+  .hero-container {
+    min-height: calc(100vh - 120px); /* Ajuster selon la hauteur du header */
     display: flex;
-    gap: var(--space-md);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-lg);
-    margin-top: var(--space-xl);
-  }
-  
-  .features-grid .card {
-    text-align: center;
-    background-color: var(--color-neutral-lighter); /* Cartes claires sur fond sombre */
-    color: var(--color-primary); /* Texte sombre dans les cartes claires */
-  }
-  
-  .features-grid h3 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-md);
+    align-items: flex-end;
+    justify-content: start;
+    width: 100%;
+    padding: 0 calc(var(--space-2xl) + var(--space-24));
   }
 
-  /* Titre de section adapté au fond sombre */
-  .features h2 {
-    color: var(--color-neutral-lighter);
+  .hero-content {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: var(--space-4xl);
   }
-  
+
+  .hero-statement {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-style: italic;
+    font-weight: var(--font-weight-lighter);
+    line-height: var(--line-height-tight);
+    letter-spacing: .015em;
+    color: var(--color-neutral-lighter);
+    margin: 0;
+  }
+
   /* Responsive */
-  @media (max-width: 640px) {
-    .hero-title {
+  @media (max-width: 768px) {
+    .hero-container {
+      min-height: calc(100vh - 100px);
+    }
+
+    .hero-content {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .hero-statement {
       font-size: var(--font-size-3xl);
+      line-height: var(--line-height-normal);
     }
-    
-    .hero-description {
-      font-size: var(--font-size-lg);
+  }
+
+  @media (max-width: 640px) {
+
+    .hero-content {
+      margin-bottom: var(--space-2xl);
     }
-    
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
+
+    .hero-statement {
+      font-size: var(--font-size-xl);
     }
-    
-    .features-grid {
-      grid-template-columns: 1fr;
+  }
+
+  /* Très petits écrans */
+  @media (max-width: 375px) {
+    .hero-statement {
+      font-size: var(--font-size-3xl);
     }
   }
 </style>
