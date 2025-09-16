@@ -228,4 +228,16 @@ body {
   body {
     transition-duration: 0.2s;
   }
+
+  .site-logo-container {
+    gap: 8px !important; 
+  }
+
+  .site-logo {
+    width: var(--logo-size-sm) !important;
+    height: var(--logo-size-sm) !important;
+  }
+  .logo-text {
+    font-size: 10px !important;
+  }
 }

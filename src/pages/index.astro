@@ -18,10 +18,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- Section Trois Piliers -->
   <section class="pillars-section">
     <div class="pillars-container">
-      <h2 class="pillars-title">Nos 3 piliers</h2>
       <div class="pillars-grid">
         <div class="pillar-card">
-          <div class="pillar-icon">🌱</div>
           <h3 class="pillar-name">Inclusion et ouverture</h3>
           <p class="pillar-description">
             Rendez vos services accessibles et élargissez votre audience.
@@ -29,7 +27,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         
         <div class="pillar-card">
-          <div class="pillar-icon">⚡</div>
           <h3 class="pillar-name">Sobriété et performance</h3>
           <p class="pillar-description">
             Réduisez l'empreinte carbone de vos sites tout en améliorant leur rapidité.
@@ -37,7 +34,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         
         <div class="pillar-card">
-          <div class="pillar-icon">🌍</div>
           <h3 class="pillar-name">Durabilité et agilité</h3>
           <p class="pillar-description">
             Construisez des bases solides, faciles à maintenir et à faire évoluer.
@@ -61,7 +57,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: flex-end;
     justify-content: start;
     width: 100%;
-    padding: 0 calc(var(--space-2xl) + var(--space-24));
   }
 
   .hero-content {
@@ -83,19 +78,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .pillars-section {
     width: 100%;
-  }
-
-  .pillars-container {
-    padding: var(--space-4xl) calc(var(--space-lg) + var(--space-24)) var(--space-4xl) calc(var(--space-2xl) + var(--space-24));
-  }
-
-  .pillars-title {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
-    margin-bottom: var(--space-2xl);
-    text-align: left;
+    margin: var(--space-2xl) 0;
   }
 
   .pillars-grid {
@@ -106,14 +89,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .pillar-card {
-    border: 1px solid var(--color-primary-lighter);
-    padding: var(--space-xl);
+    padding: calc(var(--space-md) * 2);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
     transition: var(--transition-card);
     box-shadow: var(--shadow-card);
+    background-color: var(--color-primary-dark);
+    border-radius: 16px;
   }
 
   .pillar-card:hover {
@@ -121,19 +105,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transform: translateY(-2px);
   }
 
-
-  .pillar-icon {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-md);
-    line-height: 1;
-  }
-
   .pillar-name {
     font-family: var(--font-family-primary);
     font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold);
     color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     line-height: var(--line-height-snug);
   }
 
@@ -150,7 +127,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media (max-width: 768px) {
     .hero-container {
       min-height: calc(100vh - 100px);
-      padding: 0 var(--space-lg);
     }
 
     .hero-content {
@@ -163,32 +139,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     .pillars-container {
-      padding: 0 var(--space-lg);
-    }
-
-    .pillars-title {
-      font-size: var(--font-size-xl);
-      margin-bottom: var(--space-xl);
+      padding: 0 !important;
     }
 
     .pillars-grid {
       grid-template-columns: 1fr;
       gap: var(--space-xl);
     }
-
-    .pillar-name {
-      font-size: var(--font-size-md);
-    }
-
-    .pillar-description {
-      font-size: var(--font-size-sm);
-    }
   }
 
   @media (max-width: 640px) {
-    .hero-container {
-      padding: 0 var(--space-md);
-    }
 
     .hero-content {
       margin-bottom: var(--space-2xl);
@@ -198,31 +158,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-size: var(--font-size-xl);
     }
 
-    .pillars-container {
-      padding: 0 var(--space-md);
-    }
-
-    .pillars-section {
-      padding: var(--space-3xl) 0;
-    }
-
-    .pillars-title {
-      font-size: var(--font-size-lg);
-    }
-
-    .pillar-icon {
-      font-size: var(--font-size-xl);
-    }
   }
 
   /* Très petits écrans */
   @media (max-width: 375px) {
     .hero-statement {
       font-size: var(--font-size-lg);
-    }
-
-    .pillars-title {
-      font-size: var(--font-size-md);
     }
   }
 </style>
