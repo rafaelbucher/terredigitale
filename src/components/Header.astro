@@ -10,11 +10,11 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   <div class="navbar-container">
     <div class="navbar">
       {showHomeLink ? (
-        <a href="/" class="site-logo-link" aria-label="Accueil">
-          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+        <a href="/" id="site-logo-toggle" class="site-logo-link" aria-label="Accueil">
+          <Icon size="md" color="secondary" class="site-logo" style="flex-shrink: 0;" />
         </a>
       ) : (
-        <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+        <Icon id="site-logo-toggle" size="md" color="secondary" class="site-logo" style="flex-shrink: 0;" />
       )}
     <button
         id="menu-toggle"
@@ -82,6 +82,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   const toggleBtn = document.getElementById('menu-toggle');
   const navbarNav = document.getElementById('navbar-nav');
   const toggleText = document.getElementById('menu-toggle-text');
+  const iconNav = document.getElementById('site-logo-toggle');
 
   function updateToggle() {
     if (navbarNav && toggleText) {
@@ -98,6 +99,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         const isOpen = navbarNav.style.display === 'flex';
         navbarNav.style.display = isOpen ? 'none' : 'flex';
         updateToggle();
+        iconNav.classList.toggle('open', !isOpen);
         toggleBtn.classList.toggle('open', !isOpen);
         navbarNav.classList.toggle('open', !isOpen); // <-- Ajout ici
     }
