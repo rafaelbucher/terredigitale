@@ -163,7 +163,6 @@ small {
 }
 
 .card {
-  background-color: var(--color-neutral-lighter); /* Fond légèrement plus clair que le body */
   border-radius: 0; /* Pas de border-radius */
   padding: var(--space-lg);
   box-shadow: var(--shadow-card);
