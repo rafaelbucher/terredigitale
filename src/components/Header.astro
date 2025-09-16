@@ -3,18 +3,23 @@
 import Icon from './Icon.astro';
 
 const { pathname = "/" } = Astro.props;
-const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(pathname);
+const isHomePage = pathname === "/";
+const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accueil
 ---
 
 <header class="site-header">
   <div class="navbar-container">
     <div class="navbar">
       {showHomeLink ? (
-        <a href="/" id="site-logo-toggle" class="site-logo-link" aria-label="Accueil">
+        <a href="/" id="site-logo-toggle" class="site-logo-link" aria-label="Retour à l'accueil">
           <Icon size="lg" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <span class="logo-text">TERRE DIGITALE</span>
         </a>
       ) : (
-        <Icon id="site-logo-toggle" size="lg" color="light" class="site-logo" style="flex-shrink: 0;" />
+        <div id="site-logo-toggle" class="site-logo-container">
+          <Icon size="lg" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <span class="logo-text">TERRE DIGITALE</span>
+        </div>
       )}
     <button
         id="menu-toggle"
@@ -31,11 +36,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     </div>
     <nav 
         id="navbar-nav" 
-        class={`navbar-nav${showHomeLink ? ' show-home-link' : ''}`}
+        class="navbar-nav"
         style="display: none;">
       <div class="nav-content">
         <!-- Section des liens principaux - 50% -->
         <div class="nav-links-section">
+          <p class="nav-tagline">Pour un numérique inclusif <br>et durable</p>
           <a href="/services" class="nav-link">Services</a>
           <a href="/ressources" class="nav-link">Ressources</a>
           <a href="/contact" class="nav-link">Contact</a>
@@ -102,7 +108,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   const toggleBtn = document.getElementById('menu-toggle');
   const navbarNav = document.getElementById('navbar-nav');
   const toggleText = document.getElementById('menu-toggle-text');
-  const iconNav = document.getElementById('site-logo-toggle');
+  const logoContainer = document.getElementById('site-logo-toggle');
 
   function updateToggle() {
     if (navbarNav && toggleText) {
@@ -114,9 +120,10 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
   }
 
-  function setIconColor(color: string) {
-    if (iconNav) {
-      const iconPath = iconNav.querySelector('path');
+  function setLogoColor(color: string) {
+    if (logoContainer) {
+      const iconPath = logoContainer.querySelector('path') as SVGPathElement;
+      const logoText = logoContainer.querySelector('.logo-text') as HTMLElement;
       if (iconPath) {
         if (color === 'secondary') {
           iconPath.style.fill = 'var(--color-secondary)';
@@ -124,31 +131,53 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
           iconPath.style.fill = 'var(--color-neutral-lighter)';
         }
       }
+      if (logoText) {
+        if (color === 'secondary') {
+          logoText.style.color = 'var(--color-secondary)';
+        } else {
+          logoText.style.color = 'var(--color-neutral-lighter)';
+        }
+      }
     }
   }
 
-  // Gestion du survol du bouton
+  // Gestion du survol du bouton menu
   toggleBtn?.addEventListener('mouseenter', () => {
     if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-      setIconColor('secondary');
+      setLogoColor('secondary');
     }
   });
 
   toggleBtn?.addEventListener('mouseleave', () => {
     if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-      setIconColor('light');
+      setLogoColor('light');
     }
   });
+
+  // Gestion du survol du logo (uniquement s'il est cliquable)
+  if (logoContainer && logoContainer.tagName.toLowerCase() === 'a') {
+    logoContainer.addEventListener('mouseenter', () => {
+      if (navbarNav && !navbarNav.classList.contains('menu-open')) {
+        setLogoColor('secondary');
+      }
+    });
+
+    logoContainer.addEventListener('mouseleave', () => {
+      if (navbarNav && !navbarNav.classList.contains('menu-open')) {
+        setLogoColor('light');
+      }
+    });
+  }
 
   function animateMenuOpen() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
+    const menuItems = navbarNav.querySelectorAll('.nav-tagline, .nav-link, .audit-flash-section');
     navbarNav.style.display = 'flex';
     navbarNav.classList.add('menu-open');
     
-    // Changer la couleur de l'icône immédiatement
-    setIconColor('secondary');
+    // Changer la couleur du logo immédiatement
+    setLogoColor('secondary');
     
     // Animer chaque élément séquentiellement
     menuItems.forEach((item, index) => {
@@ -169,11 +198,11 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   function animateMenuClose() {
     if (!navbarNav) return;
     
-    const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
+    const menuItems = navbarNav.querySelectorAll('.nav-tagline, .nav-link, .audit-flash-section');
     navbarNav.classList.remove('menu-open');
     
-    // Remettre la couleur par défaut de l'icône
-    setIconColor('light');
+    // Remettre la couleur par défaut du logo
+    setLogoColor('light');
     
     // Fermer tous les éléments rapidement
     menuItems.forEach((item) => {
@@ -190,7 +219,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   toggleBtn?.addEventListener('click', () => {
-    if (navbarNav && iconNav && toggleBtn) {
+    if (navbarNav && logoContainer && toggleBtn) {
         const isOpen = navbarNav.classList.contains('menu-open');
         
         if (isOpen) {
@@ -206,7 +235,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 
   navbarNav?.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      if (navbarNav && iconNav && toggleBtn) {
+      if (navbarNav && logoContainer && toggleBtn) {
         animateMenuClose();
         
         updateToggle();
@@ -225,11 +254,34 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     background: var(--color-primary);
   }
 
-  .site-logo-link {
+  .site-logo-link,
+  .site-logo-container {
     display: inline-flex;
     align-items: center;
+    gap: 8px; /* Marge fixe de 8px */
     text-decoration: none;
     z-index: 100;
+    cursor: pointer;
+  }
+
+  .site-logo-link {
+    transition: all 0.3s ease;
+  }
+
+  .logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--color-neutral-lighter);
+    font-size: var(--font-size-sm); /* Taille fixe, ne change pas selon le viewport */
+    transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin: 0; /* Reset des marges par défaut */
+    display: flex;
+    align-items: center; /* Centrage vertical */
   }
 
   .navbar {
@@ -241,10 +293,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     margin: 0 auto;
   }
 
-  /* Transition fluide pour l'icône */
+  /* Transition fluide pour l'icône et le texte */
   .site-logo path,
-  #site-logo-toggle path {
-    transition: fill 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  #site-logo-toggle path,
+  .logo-text {
+    transition: fill 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .menu-toggle-btn {
@@ -381,8 +435,22 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     transform: translateY(30px);
   }
 
+  .nav-tagline {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-lg);
+    line-height: var(--line-height-normal);
+    text-align: left;
+    
+    /* État initial - invisible comme les autres éléments */
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
   .nav-link {
-    color: var(--color-neutral-lighter);
+    color: var(--color-secondary); /* Orange par défaut */
     background-color: transparent;
     text-decoration: none;
     font-size: var(--font-size-lg);
@@ -403,7 +471,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   .nav-link:hover {
-    color: var(--color-secondary);
+    color: var(--color-neutral-lighter); /* Blanc au survol */
   }
 
   .nav-link-home {
@@ -491,30 +559,14 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     color: var(--color-neutral-lighter) !important;
   }
   
-  /* Styles pour les pages avec home link */
-  .navbar-nav.show-home-link .nav-link,
-  .navbar-nav.show-home-link .nav-link-button {
-    color: var(--color-secondary);
-  }
-
-  .navbar-nav.show-home-link .nav-link:hover,
-  .navbar-nav.show-home-link .nav-link-button:hover {
-    color: var(--color-neutral-lighter);
-  }
-
-  .navbar-nav.show-home-link .audit-flash-title,
-  .navbar-nav.show-home-link .audit-flash-subtitle,
-  .navbar-nav.show-home-link .audit-flash-description,
-  .navbar-nav.show-home-link .audit-flash-list li {
-    color: var(--color-neutral-lighter);
-  }
+  /* Suppression des styles spécifiques pour show-home-link car plus nécessaire */
 
   /* RESPONSIVE ADAPTATIF */
 
   /* Écrans moyens (tablettes) */
   @media (max-width: 1024px) {
     .nav-links-section {
-      padding: var(--space-lg) 0;
+      padding: 0 0 var(--space-lg) 0;
       min-height: 50svh;
     }
 
@@ -568,6 +620,8 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .audit-flash-description {
       font-size: var(--font-size-xs);
     }
+
+    /* Taille du texte du logo reste fixe */
   }
 
   /* Petits écrans (mobiles) - optimisation hauteur */
@@ -699,6 +753,8 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .nav-content {
       padding: 0 calc(var(--space-md) * 1.5);
     }
+
+    /* Taille du texte du logo reste fixe */
   }
 
   /* iPhone et petits écrans spécifiques */
@@ -733,6 +789,8 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .audit-flash-section {
       min-height: 45svh;
     }
+
+    /* Taille du texte du logo reste fixe */
   }
 
   /* Gestion spéciale pour les très petits écrans en hauteur */
