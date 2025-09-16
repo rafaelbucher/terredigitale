@@ -1,0 +1,16 @@
+---
+// filepath: /Users/admin/Desktop/terredigitale/src/components/Icon.astro
+const { color = "var(--token-couleur)", width = 24, height = 24, ...props } = Astro.props;
+---
+
+<svg
+  width={width}
+  height={height}
+  fill={color}
+  {...props}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+>
+  {/* Remplace le contenu ci-dessous par celui de ton SVG */}
+  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+</svg>
