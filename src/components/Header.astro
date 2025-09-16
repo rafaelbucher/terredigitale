@@ -356,7 +356,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
     min-height: 100svh;
     padding: 0 var(--space-lg);
   }
@@ -368,7 +367,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    height: 50%;
     min-height: 50svh;
     padding: var(--space-xl) 0;
   }
@@ -379,7 +377,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 50%;
     min-height: 50svh;
     padding: var(--space-xl) 0;
     margin: 0 var(--space-sm);
@@ -532,10 +529,12 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   @media (max-width: 1024px) {
     .nav-links-section {
       padding: var(--space-lg) 0;
+      min-height: 50svh;
     }
 
     .audit-flash-section {
       padding: var(--space-lg) 0;
+      min-height: 50svh;
     }
 
     .nav-link {
@@ -556,6 +555,15 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   @media (max-width: 768px) {
     .nav-content {
       padding: 0 var(--space-md);
+      min-height: 100svh;
+    }
+
+    .nav-links-section {
+      min-height: 50svh;
+    }
+
+    .audit-flash-section {
+      min-height: 50svh;
     }
 
     .nav-link {
@@ -575,14 +583,25 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 
   /* Petits écrans (mobiles) - optimisation hauteur */
   @media (max-height: 667px) {
+    .navbar-nav {
+      height: 100svh;
+      min-height: 100svh;
+    }
+
+    .nav-content {
+      min-height: 100svh;
+    }
+
     .nav-links-section {
       padding: var(--space-md) 0;
       min-height: 45svh;
+      flex-shrink: 0;
     }
 
     .audit-flash-section {
-      padding: var(--space-md) 0;
+      padding: var(--space-sm) 0;
       min-height: 45svh;
+      flex-shrink: 0;
     }
 
     .nav-link {
@@ -621,12 +640,26 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     }
   }
 
-  /* Très petits écrans */
+  /* Très petits écrans - MODE ADAPTABLE */
   @media (max-height: 568px) {
-    .nav-links-section,
+    .nav-content {
+      /* Passer en mode auto pour permettre le scroll */
+      min-height: auto;
+      height: auto;
+    }
+
+    .nav-links-section {
+      /* Ne plus forcer 50% mais s'adapter au contenu */
+      flex: 0 0 auto;
+      min-height: auto;
+      padding: var(--space-md) 0 var(--space-sm) 0;
+    }
+
     .audit-flash-section {
-      min-height: 40svh;
-      padding: var(--space-sm) 0;
+      /* Ne plus forcer 50% mais s'adapter au contenu */
+      flex: 0 0 auto;
+      min-height: auto;
+      padding: var(--space-sm) 0 var(--space-lg) 0;
     }
 
     .nav-link {
@@ -658,6 +691,11 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .audit-flash-list li {
       margin-bottom: 2px;
     }
+
+    .nav-link-modal {
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--font-size-xs);
+    }
   }
 
   @media (max-width: 640px) {
@@ -677,7 +715,11 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   /* iPhone et petits écrans spécifiques */
   @media (max-width: 414px) and (max-height: 896px) {
     .navbar-nav {
-      height: 100vh;
+      height: 100svh;
+      min-height: 100svh;
+    }
+
+    .nav-content {
       min-height: 100svh;
     }
 
@@ -692,6 +734,10 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   }
 
   @media (max-width: 375px) and (max-height: 667px) {
+    .nav-content {
+      min-height: 100svh;
+    }
+
     .nav-links-section {
       padding-top: 70px;
       min-height: 45svh;
@@ -699,6 +745,37 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
 
     .audit-flash-section {
       min-height: 45svh;
+    }
+  }
+
+  /* Gestion spéciale pour les très petits écrans en hauteur */
+  @media (max-height: 500px) {
+    .navbar-nav {
+      height: 100svh;
+      overflow-y: scroll;
+    }
+
+    .nav-content {
+      min-height: 100svh;
+      height: auto;
+    }
+
+    .nav-links-section {
+      flex: 0 0 auto;
+      min-height: auto;
+      padding: var(--space-lg) 0 var(--space-md) 0;
+    }
+
+    .audit-flash-section {
+      flex: 0 0 auto;
+      min-height: auto;
+      padding: var(--space-md) 0 var(--space-xl) 0;
+    }
+
+    .nav-link-home {
+      position: relative;
+      top: auto;
+      left: auto;
     }
   }
 </style>
