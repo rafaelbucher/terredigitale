@@ -87,8 +87,14 @@
    * ================================ */
   
   /* Familles de police */
-  --font-family-primary: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-primary:  -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  
+  /* Police système pour les headers - NOUVEAU */
+  --font-family-headers: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+  
+  /* Police système serif - NOUVEAU */
+  --font-family-secondary: 'Charter', 'Bitstream Charter', 'Sitka Text', 'Cambria', 'serif-ui', Georgia, serif;
   
   /* Tailles de police */
   --font-size-xs: 0.75rem;     /* 12px */
@@ -120,16 +126,22 @@
   --line-height-relaxed: 1.625;
   --line-height-loose: 2;
   
-  /* Ensembles typographiques prédéfinis */
-  --typography-h1: var(--font-weight-bold) var(--font-size-4xl)/var(--line-height-tight) var(--font-family-primary);
-  --typography-h2: var(--font-weight-bold) var(--font-size-3xl)/var(--line-height-tight) var(--font-family-primary);
-  --typography-h3: var(--font-weight-semibold) var(--font-size-2xl)/var(--line-height-snug) var(--font-family-primary);
-  --typography-h4: var(--font-weight-semibold) var(--font-size-xl)/var(--line-height-snug) var(--font-family-primary);
-  --typography-h5: var(--font-weight-medium) var(--font-size-lg)/var(--line-height-normal) var(--font-family-primary);
-  --typography-h6: var(--font-weight-medium) var(--font-size-base)/var(--line-height-normal) var(--font-family-primary);
+  /* Ensembles typographiques prédéfinis - HEADERS AVEC POLICE SYSTÈME */
+  --typography-h1: var(--font-weight-bold) var(--font-size-4xl)/var(--line-height-tight) var(--font-family-headers);
+  --typography-h2: var(--font-weight-bold) var(--font-size-3xl)/var(--line-height-tight) var(--font-family-headers);
+  --typography-h3: var(--font-weight-semibold) var(--font-size-2xl)/var(--line-height-snug) var(--font-family-headers);
+  --typography-h4: var(--font-weight-semibold) var(--font-size-xl)/var(--line-height-snug) var(--font-family-headers);
+  --typography-h5: var(--font-weight-medium) var(--font-size-lg)/var(--line-height-normal) var(--font-family-headers);
+  --typography-h6: var(--font-weight-medium) var(--font-size-base)/var(--line-height-normal) var(--font-family-headers);
   --typography-body: var(--font-weight-regular) var(--font-size-base)/var(--line-height-normal) var(--font-family-primary);
   --typography-body-sm: var(--font-weight-regular) var(--font-size-sm)/var(--line-height-normal) var(--font-family-primary);
   --typography-caption: var(--font-weight-regular) var(--font-size-xs)/var(--line-height-normal) var(--font-family-primary);
+  
+  /* Ensembles typographiques avec police serif - NOUVEAU */
+  --typography-serif-large: var(--font-weight-regular) var(--font-size-xl)/var(--line-height-relaxed) var(--font-family-secondary);
+  --typography-serif-body: var(--font-weight-regular) var(--font-size-base)/var(--line-height-relaxed) var(--font-family-secondary);
+  --typography-serif-quote: var(--font-weight-regular) var(--font-size-lg)/var(--line-height-relaxed) var(--font-family-secondary);
+  --typography-serif-emphasis: var(--font-weight-medium) var(--font-size-md)/var(--line-height-normal) var(--font-family-secondary);
   
   /* ================================
    * ESPACEMENTS
