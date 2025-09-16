@@ -338,8 +338,8 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     min-height: 100vh;
     background: linear-gradient(
       to bottom,
-      var(--color-neutral-lighter) 52%,
-      var(--color-primary) 48%
+      var(--color-neutral-lighter) 50%,
+      var(--color-primary) 50%
     );
     z-index: 50;
     overflow-y: auto;
@@ -367,8 +367,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-top: calc(64px + var(--space-lg));
-    /* Espace pour le header */
   }
 
   .nav-link {
@@ -377,7 +375,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     text-decoration: none;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-lighter);
-    margin: var(--space-sm) 0;
     letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
     text-align: left;
@@ -512,7 +509,6 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     .nav-link {
       font-size: var(--font-size-md);
       margin: var(--space-xs) 0;
-      padding: var(--space-xs) var(--space-md);
     }
 
     .nav-link-home {
