@@ -210,79 +210,22 @@ small {
  * ANIMATION SCROLL COULEUR
  * ================================ */
 
-/* Transition fluide pour tous les éléments affectés */
-.site-header,
-body,
-.pillars-section {
-  transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Optimisations pour les performances */
-.site-header {
-  will-change: background-color;
-  transform: translateZ(0); /* Force GPU acceleration */
-}
-
+/* Transition fluide pour le body uniquement */
 body {
+  transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: background-color;
-}
-
-.pillars-section {
-  will-change: background-color;
-  transform: translateZ(0);
-}
-
-/* Animation pour le logo lors du changement de couleur */
-.site-header .logo-text,
-.site-header svg path {
-  transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Assurer la lisibilité du texte selon la couleur de fond orange */
-html.scrolled .site-header .logo-text {
-  color: var(--color-primary) !important; /* Texte sombre sur fond orange */
-}
-
-html.scrolled .site-header svg path {
-  fill: var(--color-primary) !important; /* Icône sombre sur fond orange */
-}
-
-html.scrolled .menu-toggle-btn {
-  color: var(--color-primary) !important; /* Bouton sombre sur fond orange */
-}
-
-html.scrolled .menu-toggle-btn .bar {
-  background-color: var(--color-primary) !important; /* Barres du menu sombres */
-}
-
-/* Effet subtil sur les cartes des piliers pendant l'animation */
-html.scrolled .pillar-card {
-  border-color: rgba(30, 30, 30, 0.2); /* Bordures sombres sur fond orange */
-  box-shadow: var(--shadow-card), 
-              0 0 20px rgba(30, 30, 30, 0.15); /* Ombre sombre */
-}
-
-/* Animation pour le contenu texte du hero sur fond orange */
-html.scrolled .hero-statement {
-  color: var(--color-primary); /* Texte sombre sur fond orange */
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3); /* Ombre claire */
 }
 
 /* Mode préférences utilisateur - respecter les préférences de mouvement */
 @media (prefers-reduced-motion: reduce) {
-  .site-header,
-  body,
-  .pillars-section {
+  body {
     transition: none !important;
   }
 }
 
 /* Responsive - ajustements pour mobile */
 @media (max-width: 768px) {
-  .site-header,
-  body,
-  .pillars-section {
+  body {
     transition-duration: 0.2s;
   }
 }

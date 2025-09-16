@@ -257,19 +257,11 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     to: RGBArray;
   }
   
-  // Configuration des couleurs - TOUTES vers #FC937F
+  // Configuration des couleurs - Uniquement le body de primary à secondary
   const COLORS: Record<string, ColorConfig> = {
-    header: {
-      from: [30, 30, 30],      // #1E1E1E (noir)
-      to: [252, 147, 127]      // #FC937F (orange clair)
-    },
     body: {
-      from: [30, 30, 30],      // #1E1E1E (noir)
-      to: [252, 147, 127]      // #FC937F (orange clair)
-    },
-    sections: {
-      from: [30, 30, 30],      // #1E1E1E (noir) 
-      to: [252, 147, 127]      // #FC937F (orange clair)
+      from: [30, 30, 30],      // #1E1E1E (primary)
+      to: [250, 97, 71]        // #FA6147 (secondary)
     }
   };
 
@@ -288,22 +280,12 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
   function updateColors(): void {
     const scrollY = window.scrollY || window.pageYOffset || 0;
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight || 600;
+    const triggerPoint = window.innerHeight * 0.5; // 50svh
     
-    const progress = Math.min(scrollY / windowHeight, 1);
+    const progress = Math.min(scrollY / triggerPoint, 1);
     const easedProgress = easeOutCubic(progress);
     
-    // Header
-    const header = document.querySelector('.site-header') as HTMLElement | null;
-    if (header) {
-      header.style.backgroundColor = interpolateColor(
-        COLORS.header.from, 
-        COLORS.header.to, 
-        easedProgress
-      );
-    }
-    
-    // Body
+    // Body seulement
     const body = document.body as HTMLElement;
     if (body) {
       body.style.backgroundColor = interpolateColor(
@@ -312,18 +294,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
         easedProgress
       );
     }
-    
-    // Sections (.pillars-section)
-    const sections = document.querySelectorAll('.pillars-section') as NodeListOf<HTMLElement>;
-    sections.forEach(function(section: HTMLElement) {
-      if (section) {
-        section.style.backgroundColor = interpolateColor(
-          COLORS.sections.from, 
-          COLORS.sections.to, 
-          easedProgress
-        );
-      }
-    });
     
     // Classe pour les états CSS
     if (progress > 0.1) {
