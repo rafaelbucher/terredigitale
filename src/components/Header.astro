@@ -18,7 +18,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
       )}
     <button
         id="menu-toggle"
-        class={`menu-toggle-btn${showHomeLink ? ' menu-toggle-btn-orange' : ' menu-toggle-btn-white'}`}
+        class="menu-toggle-btn"
         type="button"
         >
         <span id="menu-toggle-text">Menu</span>
@@ -91,14 +91,15 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         toggleText.textContent = 'Menu';
       }
     }
-  }
-    
+
+}
     toggleBtn?.addEventListener('click', () => {
     if (navbarNav) {
         const isOpen = navbarNav.style.display === 'flex';
         navbarNav.style.display = isOpen ? 'none' : 'flex';
         updateToggle();
         toggleBtn.classList.toggle('open', !isOpen);
+        navbarNav.classList.toggle('open', !isOpen); // <-- Ajout ici
     }
     });
 
@@ -135,6 +136,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
     max-width: var(--container-xl);
     margin: 0 auto;
   }
+
 .menu-toggle-btn {
   display: flex;
   align-items: center;
@@ -150,12 +152,18 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
   z-index: 100;
-  color: var(--color-neutral-lighter);
-  background-color: transparent;
-  border: 1px solid var(--color-neutral-lighter);
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  border: 1px solid var(--color-neutral-lighter);
+  background: transparent;
+  color: var(--color-neutral-lighter);
+}
+
+.menu-toggle-btn:hover {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  transition: all 0.3s;
 }
 
 .menu-toggle-btn .burger-icon {
@@ -203,7 +211,7 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
   .navbar-nav {
     width: 100%;
     max-width: var(--container-xl);
-    margin: var(--space-md) auto;
+    margin: 0 auto var(--space-md) auto;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -249,34 +257,40 @@ const showHomeLink = ["/", "/services", "/ressources", "/contact"].includes(path
         border-color: var(--color-neutral-lighter);
     }
 
-  .audit-flash-modal {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--color-primary);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    .navbar-nav .nav-link,
+.navbar-nav .nav-link-button,
+.navbar-nav .nav-link-modal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s;
+}
 
-  .audit-flash-content {
-    color: var(--color-neutral-lighter);
-    text-align: center;
-    max-width: 90vw;
-  }
-
-  .close-btn {
-    margin-top: 2rem;
-    padding: 0.75rem 2rem;
-    background: var(--color-highlight);
-    color: var(--color-neutral-lighter);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
+.navbar-nav.open .nav-link:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+.navbar-nav.open .nav-link:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+.navbar-nav.open .nav-link:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+.navbar-nav.open .nav-link:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+.navbar-nav.open .nav-link:nth-child(5),
+.navbar-nav.open .nav-link-button {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.7s;
+}
 
   @media (max-width: 768px) {
     .navbar {
