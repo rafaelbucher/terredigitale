@@ -143,13 +143,12 @@ small {
   padding: calc(var(--space-xl) * 2) var(--space-md);
 }
 
+.section:last-child {
+  margin: calc(var(--space-xl) * 2) 0 0 0;
+}
+
 .section--full {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;
   padding: calc(var(--space-xl) * 2) var(--space-md);
 }
 

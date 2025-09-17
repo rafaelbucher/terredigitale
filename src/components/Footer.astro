@@ -55,9 +55,9 @@ const { class: className = '' } = Astro.props;
 
   .footer-content {
     display: flex;
-    justify-content: space-between;
     align-items: start;
     width: 100%;
+    column-gap: 158px;
   }
 
   /* ================================
@@ -82,7 +82,7 @@ const { class: className = '' } = Astro.props;
     text-transform: uppercase;
     letter-spacing: var(--logo-text-spacing);
     line-height: 1;
-    color: var(--color-neutral-lighter);
+    color: var(--color-primary-lighter);
     font-size: var(--font-size-sm);
   }
 
@@ -93,22 +93,25 @@ const { class: className = '' } = Astro.props;
   .footer-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.25em;
     align-items: flex-start;
-    text-align: left;
   }
 
   .footer-link {
     font-family: var(--font-family-primary);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-regular);
-    color: var(--color-neutral-lighter);
+    color: var(--color-neutral-darker);
     text-decoration: none;
     line-height: var(--line-height-loose);
     transition: var(--transition-colors);
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: flex-end;
+    min-height: 36px !important;
+  }
+
+  .footer-link:first-child {
+    margin-top: 18px;
   }
 
   .footer-link:active {
@@ -132,7 +135,7 @@ const { class: className = '' } = Astro.props;
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-regular);
-    color: var(--color-neutral-lighter);
+    color: var(--color-primary-lighter) !important;
     text-decoration: none;
     transition: var(--transition-colors);
     min-height: 44px;
@@ -148,10 +151,19 @@ const { class: className = '' } = Astro.props;
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-regular);
-    color: var(--color-neutral-lighter);
+    color: var(--color-primary-lighter);
     margin: 0;
     text-align: right;
     flex-shrink: 0;
+  }
+
+  .site-footer a {
+    color: var(--color-neutral-darker);
+  }
+
+  .site-footer a:hover {
+    color: var(--color-secondary) !important;
+    transition: color 0.3s ease;
   }
 
   /* ================================
