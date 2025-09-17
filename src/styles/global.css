@@ -176,8 +176,7 @@ small {
 }
 
 .section--full {
-  width: 100%;
-  padding: calc(var(--space-xl) * 2) var(--space-md);
+  margin: 0 calc(var(--space-md) * -1) !important;
 }
 
 /* ================================
