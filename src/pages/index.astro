@@ -1,5 +1,4 @@
 ---
-// index.astro - MOBILE FIRST ONLY
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -11,6 +10,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="hero-content">
       <p class="hero-quote">« L’accessibilité numérique ne devrait pas être considérée comme une option, mais comme un droit fondamental. »</p>
       <p class="hero-author">Tim Berners-Lee</p>
+    </div>
+    <div class="hero-baseline">
+      <h2 class="baseline-title">Des produits digitaux performants, responsables <br>et inclusifs.</h2>
+      <p class="baseline-text">Terre Digitale transforme vos sites et applis en moteurs de croissance et d’impact positif. Des expériences numériques alliant innovation, accessibilité et responsabilité pour un impact durable.</p>
     </div>
   </div>
 
@@ -42,22 +45,120 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 </BaseLayout>
 
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('.hero-content');
+    const heroBaseline = document.querySelector('.hero-baseline');
+    if (!heroContent || !heroBaseline) return;
+    [heroContent, heroBaseline].forEach(el => {
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            el.classList.add('in-view');
+          } else {
+            el.classList.remove('in-view');
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(el);
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const heroContent = document.querySelector('.hero-content');
+    if (!heroContent) return;
+    if (window.scrollY > 300) {
+      heroContent.classList.add('scrolled');
+    } else {
+      heroContent.classList.remove('scrolled');
+    }
+  });
+</script>
+
 <style>
   /* ================================
    * HERO SECTION - MOBILE FIRST
    * ================================ */
 
-  .hero-container {      
+  .hero-container {
     height: calc(100svh - 80px);
     display: flex;
-    align-items: flex-end;
-    justify-content: start;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
     width: 100%;
     padding-top: var(--space-lg);
+  }
+  .hero-content {
+    height: calc(100svh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(.4,.2,.2,1), transform 0.8s cubic-bezier(.4,.2,.2,1);
+  }
+
+  .hero-baseline {
+    height: calc(100svh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(.4,.2,.2,1), transform 0.8s cubic-bezier(.4,.2,.2,1);
+  }
+
+  .hero-baseline h2,
+  .hero-baseline p {
+    white-space: pre-wrap;
+    word-spacing: normal;
+  }
+
+  .baseline-title {    
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: 0.05em;
+    text-align: left;
+    color: var(--color-neutral-lighter);
+    margin: 0 0 var(--space-xl) 0;
+    animation: fadeInTitle 0.8s ease-out;
+  }
+
+  .baseline-text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-darker);
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-align: left;
+  }
+
+  .hero-content.in-view,
+  .hero-baseline.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .hero-content {
     width: 100%;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(.4,.2,.2,1), opacity 0.6s cubic-bezier(.4,.2,.2,1);
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .hero-content.scrolled {
+    transform: translateY(-60px);
+    opacity: 0;
+    pointer-events: none;
   }
 
   .hero-quote {
@@ -79,7 +180,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: var(--line-height-normal);
     letter-spacing: 0.05em;
     text-align: left;
-    color: var(--color-neutral-lighter);
+    color: var(--color-neutral-darker);
     margin: 0 0 var(--space-xl) 0;
     animation: fadeInTitle 1s ease-out;
   }

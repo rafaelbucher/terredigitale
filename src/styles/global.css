@@ -2,6 +2,34 @@
 @import './tokens.css';
 
 /* ================================
+ * HERO SECTION - MOBILE FIRST
+ * ================================ */
+
+@keyframes heroScrollFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@scroll-timeline heroTimeline {
+  source: auto;
+  orientation: block;
+}
+
+.hero-container {
+  animation-name: heroScrollFade;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-timeline: heroTimeline;
+}
+
+/* ================================
  * RESET & BASE STYLES - MOBILE ONLY
  * ================================ */
 
