@@ -5,11 +5,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Accueil - Terre Digitale"
-  description="Nous croyons en un numérique qui allie performance, responsabilité et accessibilité. Avec Terre Digitale, transformez vos produits en leviers de changement positif."
+  description="Pour un numérique inclusif <br>et durable"
 >
   <div class="hero-container">
     <div class="hero-content">
-      <p class="hero-statement" id="hero-animated"></p>
+      <h2 class="hero-title" id="hero-animated"></h2>
     </div>
   </div>
 
@@ -43,43 +43,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-const lines = [
-  "Nous croyons en un numérique qui allie performance, responsabilité et accessibilité.",
-  "Avec TERRE DIGITALE, transformez vos produits en leviers de changement positif."
-];
-const target = document.getElementById('hero-animated');
-let idx = 0;
-function showWords(line: string, container: HTMLElement) {
-  if (!container) return;
-  container.innerHTML = '';
-  const words = line.split(' ');
-  let delay = 100;
-  /** @type {string} */
-  words.forEach((word: string) => {
-    const span = document.createElement('span');
-    if (word === 'TERRE' || word === 'DIGITALE') {
-      span.className = 'hero-word hero-md';
-    } else {
+  const heroText = "Faire germer un numérique inclusif et durable";
+  const target = document.getElementById('hero-animated');
+  function showWords(line: string, container: HTMLElement) {
+    if (!container) return;
+    container.innerHTML = '';
+    const words = line.split(' ');
+    let delay = 100;
+    words.forEach((word) => {
+      const span = document.createElement('span');
       span.className = 'hero-word';
+      if (word === 'numérique' || word === 'inclusif' || word === 'durable') {
+        span.style.letterSpacing = '0.18em';
+        span.style.color = 'var(--color-secondary)';
+      }
+  span.textContent = word;
+      span.style.opacity = '0';
+      span.style.transition = 'opacity 0.5s';
+      container.appendChild(span);
+      setTimeout(() => {
+        span.style.opacity = '1';
+      }, delay);
+      delay += 80 + word.length * 30;
+    });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    if (target) {
+      showWords(heroText, target);
     }
-    span.textContent = word + ' ';
-    span.style.opacity = '0';
-    span.style.transition = 'opacity 0.5s';
-    container.appendChild(span);
-    setTimeout(() => {
-      span.style.opacity = '1';
-    }, delay);
-    // Augmente le délai en fonction de la longueur du mot
-    delay += 80 + word.length * 30;
   });
-}
-function animateLines() {
-  if (!target) return;
-  target.innerHTML = '';
-  // Anime tous les mots des deux phrases en une seule séquence
-  showWords(lines.join(' '), target);
-}
-window.addEventListener('DOMContentLoaded', animateLines);
 </script>
 
 <style>
@@ -92,8 +84,8 @@ window.addEventListener('DOMContentLoaded', animateLines);
   .hero-container {
     min-height: calc(100vh - 110px);
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: start;
     width: 100%;
   }
 
@@ -103,29 +95,22 @@ window.addEventListener('DOMContentLoaded', animateLines);
     margin-bottom: var(--space-4xl);
   }
 
-  .hero-statement {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-2xl);
-  font-style: normal;
-  font-weight: var(--font-weight-lighter);
-  line-height: var(--line-height-tight);
-  letter-spacing: .015em;
-  color: var(--color-neutral-lighter);
-  margin: 0;
-}
-
-.hero-md {
-  font-size: var(--font-size-md) !important;
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.18em;
-  color: var(--color-secondary);
-}
+  .hero-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: 1px;
+    text-align: left;
+    color: var(--color-neutral-lighter);
+    margin: 0;
   }
 
   .hero-word {
     display: inline-block;
     opacity: 0;
     transition: opacity 0.5s;
+    margin-right: 0.35em;
   }
 
 
