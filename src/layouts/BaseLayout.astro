@@ -65,37 +65,6 @@ const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname)
       <slot />
     </main>
     
-    <!-- Footer avec logo - COMMENTÉ POUR FOCUS SUR HEADER
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <Logo 
-            size="lg" 
-            variant="light" 
-            class="footer-logo"
-          />
-          <p class="footer-description">
-            Terre Digitale - Solutions numériques innovantes
-          </p>
-        </div>
-        
-        <div class="footer-links">
-          <div class="footer-section">
-            <h4>Navigation</h4>
-            <ul>
-              <li><a href="/">Accueil</a></li>
-              <li><a href="/design-system">Design System</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2024 Terre Digitale. Tous droits réservés.</p>
-      </div>
-    </footer>
-    -->
-    
     <!-- Modale Audit flash -->
     <div id="audit-flash-modal" class="audit-flash-modal" style="display:none;">
       <div class="audit-flash-content">
@@ -109,13 +78,15 @@ const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname)
 </html>
 
 <style>
-  /* Styles spécifiques au layout avec padding --space-32 */
+  /* Styles spécifiques au layout avec couleur fixe */
   .site-header {
     position: sticky;
     top: 0;
     z-index: var(--z-navbar);
     padding: var(--space-lg);
+    background-color: var(--color-primary);
   }
+  
   /* Menu vertical en overlay */
   .site-logo-link {
     display: inline-flex;
@@ -172,91 +143,10 @@ const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname)
     transition: var(--transition-colors);
   }
   
-  /* FOOTER STYLES - COMMENTÉ POUR FOCUS SUR HEADER
-  .site-main {
-    min-height: auto;
-    padding: var(--space-32);
-  }
-  */
-  
-  /* FOOTER STYLES - COMMENTÉ POUR FOCUS SUR HEADER
-  .site-footer {
-    color: var(--color-neutral-lighter);
-    padding: var(--space-32);
-    margin-top: auto;
-    border-top: 1px solid var(--color-primary-lighter);
-  }
-  
-  .footer-content {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-xl);
-  }
-  
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-  
-  .footer-description {
-    color: var(--color-neutral-dark);
-    margin: 0;
-    max-width: 300px;
-  }
-  
-  .footer-links {
-    display: flex;
-    gap: var(--space-xl);
-  }
-  
-  .footer-section h4 {
-    color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-md);
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-section li {
-    margin-bottom: var(--space-sm);
-  }
-  
-  .footer-section a {
-    color: var(--color-neutral-dark);
-    text-decoration: none;
-    font-size: var(--font-size-sm);
-    transition: var(--transition-colors);
-  }
-  
-  .footer-section a:hover {
-    color: var(--color-highlight);
-  }
-  
-  .footer-bottom {
-    padding-top: var(--space-lg);
-    border-top: 1px solid var(--color-primary-lighter);
-    text-align: center;
-  }
-  
-  .footer-bottom p {
-    color: var(--color-neutral-dark);
-    font-size: var(--font-size-sm);
-    margin: 0;
-  }
-  */
-  
-  /* Assurer que le body prend toute la hauteur */
+  /* Assurer que le body prend toute la hauteur avec couleur fixe */
   html, body {
     height: 100%;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
   }
   
   body {
@@ -276,17 +166,6 @@ const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname)
       flex-direction: column;
       gap: var(--space-sm);
     }
-    
-    /* FOOTER RESPONSIVE - COMMENTÉ
-    .footer-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    
-    .footer-links {
-      justify-content: center;
-    }
-    */
     
     /* Réduire le padding sur mobile */
     .site-header,

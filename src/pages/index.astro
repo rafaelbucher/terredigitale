@@ -9,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <div class="hero-container">
     <div class="hero-content">
-      <h2 class="hero-title" id="hero-animated"></h2>
+      <h2 class="hero-title">Faire germer un numérique inclusif et durable</h2>
     </div>
   </div>
 
@@ -42,40 +42,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 </BaseLayout>
 
-<script>
-  const heroText = "Faire germer un numérique inclusif et durable";
-  const target = document.getElementById('hero-animated');
-  function showWords(line: string, container: HTMLElement) {
-    if (!container) return;
-    container.innerHTML = '';
-    const words = line.split(' ');
-    let delay = 100;
-    words.forEach((word) => {
-      const span = document.createElement('span');
-      span.className = 'hero-word';
-      if (word === 'numérique' || word === 'inclusif' || word === 'durable') {
-        span.style.letterSpacing = '0.18em';
-        span.style.color = 'var(--color-secondary)';
-      }
-  span.textContent = word;
-      span.style.opacity = '0';
-      span.style.transition = 'opacity 0.5s';
-      container.appendChild(span);
-      setTimeout(() => {
-        span.style.opacity = '1';
-      }, delay);
-      delay += 80 + word.length * 30;
-    });
-  }
-  window.addEventListener('DOMContentLoaded', () => {
-    if (target) {
-      showWords(heroText, target);
-    }
-  });
-</script>
-
 <style>
-  /* Background global de la page - SUPPRIMÉ car seul le body garde les background-color */
+  /* Background global de la page */
   :global(body) {
     background-color: var(--color-primary) !important;
   }
@@ -106,17 +74,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
-  .hero-word {
-    display: inline-block;
-    opacity: 0;
-    transition: opacity 0.5s;
-    margin-right: 0.35em;
+  /* Animation CSS pure pour faire apparaître le titre progressivement */
+  .hero-title {
+    animation: fadeInTitle 0.8s ease-out;
   }
 
+  @keyframes fadeInTitle {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   .pillars-section {
     width: 100%;
     margin: var(--space-2xl) 0;
+  }
+
+  .pillars-container {
+    width: 100%;
   }
 
   .pillars-grid {
@@ -171,8 +151,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-bottom: var(--space-3xl);
     }
 
-    .hero-statement {
-      font-size: var(--font-size-2xl);
+    .hero-title {
+      font-size: var(--font-size-lg);
       line-height: var(--line-height-normal);
     }
 
@@ -187,21 +167,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 640px) {
-
     .hero-content {
       margin-bottom: var(--space-md);
     }
 
-    .hero-statement {
-      font-size: var(--font-size-xl);
+    .hero-title {
+      font-size: var(--font-size-md);
     }
-
   }
 
   /* Très petits écrans */
   @media (max-width: 375px) {
-    .hero-statement {
-      font-size: var(--font-size-lg);
+    .hero-title {
+      font-size: var(--font-size-base);
     }
   }
 </style>

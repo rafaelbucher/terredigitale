@@ -27,7 +27,7 @@ body {
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-normal);
   color: var(--color-primary);
-  background-color: var(--color-neutral-lighter);
+  background-color: var(--color-primary); /* Couleur fixe au lieu de neutral-lighter */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,7 +38,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--space-md);
-  color: var(--color-primary);
+  color: var(--color-neutral-lighter); /* Couleur claire pour contraste sur fond sombre */
 }
 
 h1 { font: var(--typography-h1); }
@@ -51,12 +51,12 @@ h6 { font: var(--typography-h6); }
 p {
   font: var(--typography-body);
   margin-bottom: var(--space-md);
-  color: var(--color-primary);
+  color: var(--color-neutral-lighter); /* Couleur claire pour contraste sur fond sombre */
 }
 
 small {
   font: var(--typography-caption);
-  color: var(--color-primary-light);
+  color: var(--color-neutral-light);
 }
 
 /* ================================
@@ -207,28 +207,16 @@ small {
 }
 
 /* ================================
- * ANIMATION SCROLL COULEUR
+ * STATIQUE - PAS D'ANIMATION SCROLL
  * ================================ */
 
-/* Transition fluide pour le body uniquement */
+/* Le body garde sa couleur fixe sans animation */
 body {
-  transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: background-color;
-}
-
-/* Mode préférences utilisateur - respecter les préférences de mouvement */
-@media (prefers-reduced-motion: reduce) {
-  body {
-    transition: none !important;
-  }
+  background-color: var(--color-primary) !important;
 }
 
 /* Responsive - ajustements pour mobile */
 @media (max-width: 768px) {
-  body {
-    transition-duration: 0.2s;
-  }
-
   .site-logo-container {
     gap: 8px !important; 
   }
