@@ -1,10 +1,14 @@
 ---
-// filepath: /Users/admin/Desktop/terredigitale/src/components/Header.astro
+// Header.astro - MOBILE FIRST ONLY
 import Icon from './Icon.astro';
+
+export interface Props {
+  pathname?: string;
+}
 
 const { pathname = "/" } = Astro.props;
 const isHomePage = pathname === "/";
-const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accueil
+const showHomeLink = !isHomePage;
 ---
 
 <header class="site-header">
@@ -12,34 +16,36 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     <div class="navbar">
       {showHomeLink ? (
         <a href="/" id="site-logo-toggle" class="site-logo-link" aria-label="Retour à l'accueil">
-          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <Icon size="sm" color="light" class="site-logo" />
           <span class="logo-text">TERRE DIGITALE</span>
         </a>
       ) : (
         <div id="site-logo-toggle" class="site-logo-container">
-          <Icon size="md" color="light" class="site-logo" style="flex-shrink: 0;" />
+          <Icon size="sm" color="light" class="site-logo" />
           <span class="logo-text">TERRE DIGITALE</span>
         </div>
       )}
-    <button
+    
+      <button
         id="menu-toggle"
         class="menu-toggle-btn"
         type="button"
-        >
+        aria-label="Menu principal"
+      >
         <span class="burger-icon" aria-hidden="true">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </span>
-        <span id="menu-toggle-text" class="menu-toggle-text">Menu</span>
       </button>
     </div>
+    
     <nav 
-        id="navbar-nav" 
-        class="navbar-nav"
-        style="display: none;">
+      id="navbar-nav" 
+      class="navbar-nav"
+      style="display: none;"
+    >
       <div class="nav-content">
-        <!-- Section des liens principaux - 50% -->
         <div class="nav-links-section">
           <a href="/services" class="nav-link">Services</a>
           <a href="/ressources" class="nav-link">Ressources</a>
@@ -47,7 +53,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
           <a href="/design-system" class="nav-link">Design System</a>
         </div>
         
-        <!-- Section audit flash - 50% -->
         <div class="audit-flash-section">
           <div class="audit-flash-content">
             <p class="audit-flash-tagline">Nos trois engagements</p>
@@ -60,158 +65,72 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
               Télécharger un exemple d'audit flash
             </a>
           </div>
-          <button class="nav-link nav-link-button nav-link-modal" type="button">Demander un audit flash</button>
+          <button class="nav-link nav-link-button nav-link-modal" type="button">
+            Demander un audit flash
+          </button>
         </div>
       </div>
     </nav>
   </div>
 </header>
 
-<!-- Modale Audit flash -->
-<div id="audit-flash-modal" class="audit-flash-modal" style="display:none;">
-  <div class="audit-flash-content">
-    <h2>Audit flash</h2>
-    <p>Votre audit numérique express commence ici.</p>
-    <button id="close-audit-flash" class="close-btn">Fermer</button>
-  </div>
-</div>
-
 <script>
-  // Audit flash modal
-  const btn = document.getElementById('audit-flash-btn');
-  const modal = document.getElementById('audit-flash-modal');
-  const closeBtn = document.getElementById('close-audit-flash');
-
-  btn?.addEventListener('click', () => {
-    if (modal) {
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-  });
-
-  closeBtn?.addEventListener('click', () => {
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (modal && modal.style.display === 'flex' && e.key === 'Escape') {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  });
-
-  // Menu toggle avec gestion du survol
   const toggleBtn = document.getElementById('menu-toggle');
   const navbarNav = document.getElementById('navbar-nav');
-  const toggleText = document.getElementById('menu-toggle-text');
   const logoContainer = document.getElementById('site-logo-toggle');
 
-  function updateToggle() {
-    if (navbarNav && toggleText) {
-      if (navbarNav.classList.contains('menu-open')) {
-        toggleText.textContent = 'Fermer';
-      } else {
-        toggleText.textContent = 'Menu';
-      }
-    }
-  }
-
-  function setLogoColor(color: string) {
+  function setLogoColor(color: string): void {
     if (logoContainer) {
-      const iconPath = logoContainer.querySelector('path') as SVGPathElement;
-      const logoText = logoContainer.querySelector('.logo-text') as HTMLElement;
+      const iconPath = logoContainer.querySelector('path') as SVGPathElement | null;
+      const logoText = logoContainer.querySelector('.logo-text') as HTMLElement | null;
       if (iconPath) {
-        if (color === 'secondary') {
-          iconPath.style.fill = 'var(--color-neutral-lighter)';
-        } else {
-          iconPath.style.fill = 'var(--color-neutral-lighter)';
-        }
+        iconPath.style.fill = color === 'secondary' ? 
+          'var(--color-secondary)' : 'var(--color-neutral-lighter)';
       }
       if (logoText) {
-        if (color === 'secondary') {
-          logoText.style.color = 'var(--color-neutral-lighter)';
-        } else {
-          logoText.style.color = 'var(--color-neutral-lighter)';
-        }
+        logoText.style.color = color === 'secondary' ? 
+          'var(--color-secondary)' : 'var(--color-neutral-lighter)';
       }
     }
   }
 
-  // Gestion du survol du bouton menu
-  toggleBtn?.addEventListener('mouseenter', () => {
-    if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-      setLogoColor('secondary');
-    }
-  });
-
-  toggleBtn?.addEventListener('mouseleave', () => {
-    if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-      setLogoColor('light');
-    }
-  });
-
-  // Gestion du survol du logo (uniquement s'il est cliquable)
-  if (logoContainer && logoContainer.tagName.toLowerCase() === 'a') {
-    logoContainer.addEventListener('mouseenter', () => {
-      if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-        setLogoColor('secondary');
-      }
-    });
-
-    logoContainer.addEventListener('mouseleave', () => {
-      if (navbarNav && !navbarNav.classList.contains('menu-open')) {
-        setLogoColor('light');
-      }
-    });
-  }
-
-  function animateMenuOpen() {
+  function animateMenuOpen(): void {
     if (!navbarNav) return;
     
     const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.style.display = 'flex';
     navbarNav.classList.add('menu-open');
     
-    // Changer la couleur du logo immédiatement
     setLogoColor('secondary');
     
-    // Animer chaque élément séquentiellement
     menuItems.forEach((item, index) => {
       const htmlItem = item as HTMLElement;
-      // Reset initial
       htmlItem.style.opacity = '0';
       htmlItem.style.transform = 'translateY(30px)';
-      htmlItem.style.transition = 'opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      htmlItem.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       
-      // Animer avec délai
       setTimeout(() => {
         htmlItem.style.opacity = '1';
         htmlItem.style.transform = 'translateY(0)';
-      }, (index + 1) * 150); // 150ms de délai entre chaque
+      }, (index + 1) * 150);
     });
   }
 
-  function animateMenuClose() {
+  function animateMenuClose(): void {
     if (!navbarNav) return;
     
     const menuItems = navbarNav.querySelectorAll('.nav-link, .audit-flash-section');
     navbarNav.classList.remove('menu-open');
     
-    // Remettre la couleur par défaut du logo
     setLogoColor('light');
     
-    // Fermer tous les éléments rapidement
     menuItems.forEach((item) => {
       const htmlItem = item as HTMLElement;
-      htmlItem.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+      htmlItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
       htmlItem.style.opacity = '0';
       htmlItem.style.transform = 'translateY(-20px)';
     });
     
-    // Cacher le menu après l'animation
     setTimeout(() => {
       navbarNav.style.display = 'none';
     }, 400);
@@ -219,16 +138,15 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 
   toggleBtn?.addEventListener('click', () => {
     if (navbarNav && logoContainer && toggleBtn) {
-        const isOpen = navbarNav.classList.contains('menu-open');
-        
-        if (isOpen) {
-          animateMenuClose();
-        } else {
-          animateMenuOpen();
-        }
-        
-        updateToggle();
-        toggleBtn.classList.toggle('open', !isOpen);
+      const isOpen = navbarNav.classList.contains('menu-open');
+      
+      if (isOpen) {
+        animateMenuClose();
+      } else {
+        animateMenuOpen();
+      }
+      
+      toggleBtn.classList.toggle('open', !isOpen);
     }
   });
 
@@ -236,8 +154,6 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     link.addEventListener('click', () => {
       if (navbarNav && logoContainer && toggleBtn) {
         animateMenuClose();
-        
-        updateToggle();
         toggleBtn.classList.remove('open');
       }
     });
@@ -245,155 +161,128 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
 </script>
 
 <style>
+  /* ================================
+   * HEADER - MOBILE FIRST ONLY
+   * ================================ */
+  
   .site-header {
     z-index: var(--z-navbar);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     background-color: var(--color-primary);
   }
 
-  .site-logo-link,
-  .site-logo-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px; /* Marge fixe de 8px */
-    text-decoration: none;
-    z-index: 100;
-    cursor: pointer;
-  }
-
-  .site-logo-link {
-    transition: all 0.3s ease;
-  }
-
-  .logo-text {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    line-height: 1;
-    white-space: nowrap;
-    flex-shrink: 0;
-    color: var(--color-neutral-lighter);
-    font-size: var(--font-size-sm); /* Taille fixe, ne change pas selon le viewport */
-    transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    margin: 0; /* Reset des marges par défaut */
-    display: flex;
-    align-items: center; /* Centrage vertical */
+  .navbar-container {
+    width: 100%;
   }
 
   .navbar {
     position: relative;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: var(--container-xl);
-    margin: 0 auto;
   }
 
-  /* Transition fluide pour l'icône et le texte */
+  /* ================================
+   * LOGO - MOBILE OPTIMIZED
+   * ================================ */
+
+  .site-logo-link,
+  .site-logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    z-index: 100;
+  }
+
+  .site-logo-link {
+    transition: var(--transition-all);
+  }
+
+  .logo-text {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-regular);
+    text-transform: uppercase;
+    letter-spacing: var(--logo-text-spacing);
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-neutral-lighter);
+    font-size: var(--font-size-xs);
+    transition: var(--transition-colors);
+    margin: 0;
+  }
+
+  /* Transition pour l'icône et le texte */
   .site-logo path,
   #site-logo-toggle path,
   .logo-text {
-    transition: fill 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: var(--transition-colors);
   }
 
+  /* ================================
+   * MENU TOGGLE - MOBILE
+   * ================================ */
+  
   .menu-toggle-btn {
-    display: flex;
+    display: none;
     align-items: center;
-    gap: var(--space-xs);
-    position: absolute;
-    top: 10px;
-    right: 6px;
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-lighter);
     border: none;
     cursor: pointer;
-    padding: calc(var(--space-xs) * 2) 0 calc(var(--space-xs) * 2) var(--space-md);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wide);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
+    padding: var(--space-sm);
     background-color: transparent;
     color: var(--color-neutral-lighter);
+    z-index: 100;
+    min-height: 44px;
+    min-width: 44px;
   }
 
-  .menu-toggle-btn:hover {
-    color: var(--color-secondary);
-    transition: all 0.3s;
-  }
 
-  .menu-toggle-btn:not(:focus) {
-    color: var(--color-neutral-lighter);
-    transition: all 0.3s;
-  }
-
-  .menu-toggle-btn .burger-icon {
+  .burger-icon {
     display: inline-block;
-    width: 16px;
+    width: 20px;
     height: 16px;
     position: relative;
-    margin-right: var(--space-xs);
-    margin-top: -6px;
-    transition: all 0.3s;
+    transition: var(--transition-all);
   }
 
-  .menu-toggle-btn .bar {
+  .bar {
     display: block;
     position: absolute;
     left: 0;
     width: 100%;
-    height: 1px;
-    background-color: white;
-    transition: all 0.3s;
+    height: 2px;
+    background-color: var(--color-neutral-lighter);
+    transition: var(--transition-all);
   }
 
-  .menu-toggle-btn:hover .bar {
-    background-color: var(--color-secondary);
-  }
-
-  .menu-toggle-btn .bar:nth-child(1) {
-    top: 4px;
-  }
-  .menu-toggle-btn .bar:nth-child(2) {
-    top: 10px;
-  }
-  .menu-toggle-btn .bar:nth-child(3) {
-    top: 16px;
-  }
+  .bar:nth-child(1) { top: 0; }
+  .bar:nth-child(2) { top: 7px; }
+  .bar:nth-child(3) { top: 14px; }
 
   /* Animation croix quand menu ouvert */
-  .menu-toggle-btn.open {
-    color: var(--color-neutral-lighter);
-  }
-
-  .menu-toggle-btn.open .bar,
-  .menu-toggle-btn .open .bar,
-  .menu-toggle-btn:hover .open .bar{
-    color: var(--color-neutral-lighter);
-  }
-
-  .menu-toggle-btn.open .burger-icon .bar:nth-child(1) {
-    top: 10px;
+  .menu-toggle-btn.open .bar:nth-child(1) {
+    top: 7px;
     transform: rotate(45deg);
   }
-  .menu-toggle-btn.open .burger-icon .bar:nth-child(2) {
+  .menu-toggle-btn.open .bar:nth-child(2) {
     opacity: 0;
   }
-  .menu-toggle-btn.open .burger-icon .bar:nth-child(3) {
-    top: 10px;
+  .menu-toggle-btn.open .bar:nth-child(3) {
+    top: 7px;
     transform: rotate(-45deg);
   }
+
+  /* ================================
+   * NAVIGATION OVERLAY - MOBILE FULLSCREEN
+   * ================================ */
 
   .navbar-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100svh;
-    min-height: 100svh;
+    height: 100vh;
     background: linear-gradient(
       to bottom,
       var(--color-secondary) 50%,
@@ -401,52 +290,82 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     );
     z-index: 50;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   .navbar-nav.menu-open {
     display: flex !important;
   }
 
-  /* Conteneur pour organiser le contenu - RÉPARTITION 50/50 */
   .nav-content {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100svh;
-    padding: 0 var(--space-xs);
+    height: 100vh;
+    padding: 0 var(--space-md);
   }
 
-  /* Section des liens principaux - 50% de l'espace */
+  /* ================================
+   * NAVIGATION SECTIONS - 50/50 SPLIT
+   * ================================ */
+
   .nav-links-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: flex-start;
-    min-height: 50svh;
     padding: var(--space-xl) 0;
   }
 
-  /* Section audit flash - 50% de l'espace */
   .audit-flash-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 50svh;
-    padding: 0;
-    padding-top: var(--space-md);
-    margin-top: calc(var(--space-md) * -1);
-    margin-bottom: var(--space-md);
-    
-    /* État initial - invisible comme les autres éléments */
+    padding: var(--space-md) 0;
     opacity: 0;
     transform: translateY(30px);
   }
 
+  /* ================================
+   * NAVIGATION LINKS
+   * ================================ */
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    color: var(--color-neutral-lighter);
+    text-decoration: none;
+    font-family: var(--font-family-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--space-sm);
+    line-height: var(--line-height-normal);
+    text-align: left;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-colors);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ================================
+   * AUDIT FLASH SECTION
+   * ================================ */
+
+  .audit-flash-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
   .audit-flash-tagline {
-    font-family: var(--font-family-secondary);
+    font-family: var(--font-family-primary);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
     color: var(--color-secondary);
@@ -456,75 +375,16 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     margin-top: var(--space-lg);
   }
 
-  .nav-link {
-    display: block;
-    width: 100%;
-    color: var(--color-neutral-lighter);
-    text-decoration: none;
-    font-family: var(--font-family-primary);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wide);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-lighter);
-    color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-sm);
-    line-height: var(--line-height-normal);
-    text-align: left;
-    cursor: pointer;
-    
-    /* État initial - invisible */
-    opacity: 0;
-    transform: translateY(30px);
-    
-    /* Transition au survol pour les couleurs */
-    transition: color 0.3s ease;
-  }
-
-  .nav-link:last-child {
-    margin-bottom: 0;
-  }
-
-  .nav-link-home {
-    position: absolute;
-    top: 20px;
-    left: 72px;
-  }
-
-  .audit-flash-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-  }
-
-  .audit-flash-title {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-neutral-lighter);
-    margin-bottom: var(--space-xs);
-    text-transform: none;
-    letter-spacing: normal;
-  }
-
-  .audit-flash-subtitle {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-light);
-    color: var(--color-neutral-light);
-    margin-bottom: var(--space-md);
-    font-style: italic;
-  }
-
   .audit-flash-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 var(--space-sm) 0;
+    margin: 0 0 var(--space-md) 0;
   }
 
   .audit-flash-list li {
     font-size: var(--font-size-base);
     color: var(--color-neutral-lighter);
     margin-bottom: var(--space-sm);
-    position: relative;
     line-height: var(--line-height-normal);
   }
 
@@ -533,237 +393,86 @@ const showHomeLink = !isHomePage; // Lien uniquement si pas sur la page d'accuei
     font-size: var(--font-size-base);
     color: var(--color-secondary);
     text-decoration: underline;
-    transition: color 0.3s ease;
+    transition: var(--transition-colors);
     font-weight: var(--font-weight-medium);
-  }
-
-  .audit-flash-download:hover {
-    color: var(--color-secondary-dark);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .nav-link-modal {
     border: 1px solid var(--color-secondary);
-    transition: color 0.3s ease;
     padding: var(--space-sm) var(--space-lg);
     width: 100%;
     text-align: center;
     text-transform: none;
-    font-family: var(--font-family-secondary);
-    letter-spacing: var(--letter-spacing-wide);
+    font-family: var(--font-family-primary);
+    letter-spacing: 0.05em;
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-bold);
     color: var(--color-neutral-lighter) !important;
     line-height: var(--line-height-normal);
+    justify-content: center;
   }
 
-  .nav-link-modal:hover {
-    color: var(--color-neutral-lighter) !important;
-  }
-  
-  /* Suppression des styles spécifiques pour show-home-link car plus nécessaire */
+  /* ================================
+   * RESPONSIVE - TRÈS PETITS ÉCRANS
+   * ================================ */
 
-  /* RESPONSIVE ADAPTATIF */
-
-  /* Écrans moyens (tablettes) */
-  @media (max-width: 1024px) {
-    .nav-links-section {
-      padding: 0 0 var(--space-sm) 0;
-      min-height: 50svh;
-    }
-
-    .audit-flash-title {
-      font-size: var(--font-size-lg);
-    }
-
-    .audit-flash-subtitle {
-      font-size: var(--font-size-sm);
-    }
-  }
-
-  /* Écrans moyens à petits */
-  @media (max-width: 768px) {
-    .nav-content {
-      padding: 0 var(--space-md);
-      min-height: 100svh;
-    }
-
-    .nav-links-section {
-      min-height: 50svh;
-    }
-
-    .audit-flash-title {
-      font-size: var(--font-size-sm);
-    }
-
-    /* Taille du texte du logo reste fixe */
-  }
-
-  /* Petits écrans (mobiles) - optimisation hauteur */
-  @media (max-height: 667px) {
-    .navbar-nav {
-      height: 100svh;
-      min-height: 100svh;
+  @media (max-width: 320px) {
+    .site-header {
+      padding: var(--space-sm);
     }
 
     .nav-content {
-      min-height: 100svh;
+      padding: 0 var(--space-sm);
     }
 
-    .nav-links-section {
-      padding: var(--space-md) 0 0 0;
-      min-height: 45svh;
-      flex-shrink: 0;
+    .logo-text {
+      font-size: 10px;
     }
 
-    .audit-flash-section {
-      padding: 0;
-      flex-shrink: 0;
+    .audit-flash-tagline {
+      font-size: var(--font-size-base);
     }
 
-    .audit-flash-title {
-      font-size: var(--font-size-sm);
-      margin-bottom: 4px;
-    }
-
-    .audit-flash-subtitle {
-      font-size: var(--font-size-xs);
-      margin-bottom: var(--space-sm);
-    }
-
-    .audit-flash-list li {
-      margin-bottom: 4px;
-    }
-
-    .audit-flash-content {
-      margin-bottom: var(--space-sm);
-    }
-
-    .nav-link-modal {
-      padding: var(--space-sm) var(--space-md);
+    .nav-link {
       font-size: var(--font-size-sm);
     }
   }
 
-  /* Très petits écrans - MODE ADAPTABLE */
-  @media (max-height: 568px) {
+  /* Hauteur viewport réduite */
+  @media (max-height: 600px) {
     .nav-content {
-      /* Passer en mode auto pour permettre le scroll */
-      min-height: auto;
       height: auto;
+      min-height: 100vh;
     }
 
     .nav-links-section {
-      /* Ne plus forcer 50% mais s'adapter au contenu */
       flex: 0 0 auto;
       min-height: auto;
       padding: var(--space-md) 0 var(--space-sm) 0;
     }
 
     .audit-flash-section {
-      /* Ne plus forcer 50% mais s'adapter au contenu */
       flex: 0 0 auto;
       min-height: auto;
       padding: var(--space-sm) 0 var(--space-lg) 0;
     }
 
-    .audit-flash-title {
-      font-size: var(--font-size-xs);
-      margin-bottom: 2px;
-    }
-
-    .audit-flash-subtitle {
-      font-size: 10px;
-      margin-bottom: var(--space-xs);
-    }
-
-    .audit-flash-list li {
-      font-size: 10px;
-      line-height: 1.3;
-    }
-
-    .audit-flash-list {
+    .audit-flash-tagline {
+      font-size: var(--font-size-base);
       margin-bottom: var(--space-sm);
     }
 
     .audit-flash-list li {
-      margin-bottom: 2px;
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-xs);
     }
 
     .nav-link-modal {
-      padding: var(--space-xs) var(--space-sm);
-      font-size: var(--font-size-xs);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .menu-toggle-text {
-      display: none;
-    }
-
-    .site-header {
-      padding: var(--space-md);
-    }
-
-    .nav-content {
-      padding: 0 calc(var(--space-md) * 1.5);
-    }
-
-    /* Taille du texte du logo reste fixe */
-  }
-
-  /* iPhone et petits écrans spécifiques */
-  @media (max-width: 414px) and (max-height: 896px) {
-    .navbar-nav {
-      height: 100svh;
-      min-height: 100svh;
-    }
-
-    .nav-content {
-      min-height: 100svh;
-    }
-
-    .nav-links-section {
-      min-height: 48svh;
-    }
-  }
-
-  @media (max-width: 375px) and (max-height: 667px) {
-    .nav-content {
-      min-height: 100svh;
-    }
-
-    .nav-links-section {
-      min-height: 45svh;
-    }
-  }
-
-  /* Gestion spéciale pour les très petits écrans en hauteur */
-  @media (max-height: 500px) {
-    .navbar-nav {
-      height: 100svh;
-      overflow-y: scroll;
-    }
-
-    .nav-content {
-      min-height: 100svh;
-      height: auto;
-    }
-
-    .nav-links-section {
-      flex: 0 0 auto;
-      min-height: auto;
-    }
-
-    .audit-flash-section {
-      flex: 0 0 auto;
-      min-height: auto;
-      padding: 0;
-    }
-
-    .nav-link-home {
-      position: relative;
-      top: auto;
-      left: auto;
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--font-size-sm);
     }
   }
 </style>

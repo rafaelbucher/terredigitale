@@ -1,7 +1,6 @@
 ---
-// src/layouts/BaseLayout.astro
+// BaseLayout.astro - MOBILE FIRST ONLY
 import Header from '../components/Header.astro';
-// Import direct du CSS - IMPORTANT pour le build
 import '../styles/global.css';
 
 export interface Props {
@@ -19,17 +18,14 @@ const {
 } = Astro.props;
 
 const canonicalURL = canonical ? new URL(canonical, Astro.site) : new URL(Astro.url.pathname, Astro.site);
-
 const pathname = Astro.url.pathname;
-const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname);
-
 ---
 
 <!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
@@ -52,142 +48,77 @@ const showHomeLink = ["/services", "/ressources", "/contact"].includes(pathname)
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url.origin)} />
     
-    <!-- Préchargement des polices critiques -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Mobile optimizations -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#1E1E1E" />
   </head>
   
   <body>
-    <!-- Header avec logo -->
-    <Header pathname={Astro.url.pathname} />
+    <Header pathname={pathname} />
     
     <main class="site-main">
       <slot />
     </main>
-    
-    <!-- Modale Audit flash -->
-    <div id="audit-flash-modal" class="audit-flash-modal" style="display:none;">
-      <div class="audit-flash-content">
-        <h2>Audit flash</h2>
-        <p>Votre audit numérique express commence ici.</p>
-        <button id="close-audit-flash" class="close-btn">Fermer</button>
-      </div>
-    </div>
 
   </body>
 </html>
 
 <style>
-  /* Styles spécifiques au layout avec couleur fixe */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-navbar);
-    padding: var(--space-lg);
-    background-color: var(--color-primary);
-  }
+  /* ================================
+   * LAYOUT MOBILE - STYLES GLOBAUX
+   * ================================ */
   
-  /* Menu vertical en overlay */
-  .site-logo-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
+  .site-main {
+    flex: 1;
+    padding: 0 var(--space-md);
+    width: 100%;
   }
 
-  .menu-toggle-btn {
-    position: absolute;
-    top: var(--space-xl);
-    right: var(--space-lg);
-    color: var(--color-neutral-lighter);
-    border: none;
-    cursor: pointer;
-    padding: var(--space-xs) var(--space-md);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    z-index: 2;
-  }
-
-  .navbar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    align-items: flex-end;
-    position: absolute;
-    right: var(--space-lg);
-    box-shadow: none;
-    width: auto;
-    padding: 0;
-    z-index: 1;
-  }
-
-  .nav-link {
-    color: var(--color-neutral-lighter);
-    text-decoration: none;
-    font-weight: var(--font-weight-light);
-    transition: var(--transition-colors);
-    padding: var(--space-xs) var(--space-md);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-    text-align: right;
-  }
-
-  .nav-link:hover {
-    color: var(--color-highlight);
-  }
-
-  .audit-flash-btn {
-    color: var(--color-accent);
-    border: none;
-    cursor: pointer;
-    padding: var(--space-xs) var(--space-md);
-    transition: var(--transition-colors);
-  }
-  
-  /* Assurer que le body prend toute la hauteur avec couleur fixe */
-  html, body {
-    height: 100%;
-    background-color: var(--color-primary) !important;
-  }
-  
+  /* Optimisations mobiles */
   body {
-    display: flex;
-    flex-direction: column;
+    background-color: var(--color-primary) !important;
+    overflow-x: hidden; /* Éviter scroll horizontal */
+    position: relative;
   }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-      gap: var(--space-md);
-      text-align: center;
-    }
-    
-    .navbar-nav {
-      flex-direction: column;
-      gap: var(--space-sm);
-    }
-    
-    /* Réduire le padding sur mobile */
-    .site-header,
+
+  /* Éviter les zooms accidentels */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  /* Smooth scroll pour navigation mobile */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Optimisation des tap highlights */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Focus visible amélioré pour mobile */
+  :focus-visible {
+    outline: 2px solid var(--color-highlight);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ================================
+   * RESPONSIVE - TRÈS PETITS ÉCRANS
+   * ================================ */
+
+  @media (max-width: 320px) {
     .site-main {
-      padding: var(--space-lg);
+      padding: 0 var(--space-sm);
     }
   }
-  
-  @media (max-width: 640px) {
-    .navbar-nav {
-      gap: var(--space-xs);
-    }
-    
-    .nav-link {
-      padding: var(--space-xs) var(--space-sm);
-      font-size: var(--font-size-sm);
-    }
-    
-    /* Padding encore plus réduit sur très petits écrans */
-    .site-header,
+
+  /* Orientation paysage mobile */
+  @media (orientation: landscape) and (max-height: 500px) {
     .site-main {
-      padding: var(--space-md);
+      padding: 0 var(--space-sm);
     }
   }
 </style>

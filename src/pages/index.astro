@@ -1,20 +1,20 @@
 ---
-// src/pages/index.astro
+// index.astro - MOBILE FIRST ONLY
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
   title="Accueil - Terre Digitale"
-  description="Pour un numérique inclusif <br>et durable"
+  description="Pour un numérique inclusif et durable"
 >
   <div class="hero-container">
     <div class="hero-content">
-      <h2 class="hero-title">Faire germer un numérique inclusif et durable</h2>
+      <p class="hero-quote">« L’accessibilité numérique ne devrait pas être considérée comme une option, mais comme un droit fondamental. »</p>
+      <p class="hero-author">Tim Berners-Lee</p>
     </div>
   </div>
 
-  <!-- Section Trois Piliers -->
-  <section class="pillars-section">
+  <section class="pillars-section section">
     <div class="pillars-container">
       <div class="pillars-grid">
         <div class="pillar-card">
@@ -43,56 +43,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* Background global de la page */
-  :global(body) {
-    background-color: var(--color-primary) !important;
-  }
+  /* ================================
+   * HERO SECTION - MOBILE FIRST
+   * ================================ */
 
-  /* Hero container prend toute la hauteur disponible */
   .hero-container {
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 90px);
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: start;
     width: 100%;
+    padding-top: var(--space-lg);
   }
 
   .hero-content {
     width: 100%;
-    max-width: 800px;
-    margin-bottom: var(--space-4xl);
   }
 
-  .hero-title {
+  .hero-quote {
     font-family: var(--font-family-primary);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-light);
-    line-height: var(--line-height-relaxed);
-    letter-spacing: 1px;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: 0.05em;
     text-align: left;
     color: var(--color-neutral-lighter);
-    margin: 0;
+    margin: 0 0 var(--space-md) 0;
+    animation: fadeInTitle 0.8s ease-out;
   }
 
-  /* Animation CSS pure pour faire apparaître le titre progressivement */
-  .hero-title {
-    animation: fadeInTitle 0.8s ease-out;
+  .hero-author {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-lighter);
+    line-height: var(--line-height-normal);
+    letter-spacing: 0.05em;
+    text-align: left;
+    color: var(--color-neutral-lighter);
+    margin: 0 0 var(--space-xl) 0;
+    animation: fadeInTitle 1s ease-out;
   }
 
   @keyframes fadeInTitle {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(200px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0px);
     }
   }
 
+  /* ================================
+   * PILLARS SECTION - MOBILE STACK
+   * ================================ */
+
   .pillars-section {
     width: 100%;
-    margin: var(--space-2xl) 0;
   }
 
   .pillars-container {
@@ -100,27 +108,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-2xl);
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: stretch;
   }
 
   .pillar-card {
-    padding: calc(var(--space-md) * 2);
+    padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-    transition: var(--transition-card);
+    transition: var(--transition-transform);
     box-shadow: var(--shadow-card);
     background-color: var(--color-primary-dark);
-    border-radius: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--color-primary-lighter);
   }
 
-  .pillar-card:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
+  .pillar-card:active {
+    transform: translateY(2px);
   }
 
   .pillar-name {
@@ -129,7 +137,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: var(--font-weight-bold);
     color: var(--color-neutral-lighter);
     margin-bottom: var(--space-md);
-    line-height: var(--line-height-snug);
+    line-height: var(--line-height-tight);
   }
 
   .pillar-description {
@@ -141,14 +149,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .hero-container {
-      min-height: calc(100vh - 100px);
-    }
+  /* ================================
+   * TRÈS PETITS ÉCRANS (320px)
+   * ================================ */
 
-    .hero-content {
-      margin-bottom: var(--space-3xl);
+  @media (max-width: 320px) {
+    .hero-container {
+      min-height: calc(100vh - 70px);
+      padding-top: var(--space-md);
     }
 
     .hero-title {
@@ -156,30 +164,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       line-height: var(--line-height-normal);
     }
 
-    .pillars-container {
-      padding: 0 !important;
+    .hero-content {
+      margin-bottom: var(--space-lg);
     }
 
     .pillars-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
+      gap: var(--space-md);
+    }
+
+    .pillar-card {
+      padding: var(--space-md);
+    }
+
+    .pillar-name {
+      font-size: var(--font-size-md);
+    }
+
+    .pillar-description {
+      font-size: var(--font-size-sm);
     }
   }
 
-  @media (max-width: 640px) {
+  /* ================================
+   * VIEWPORT COURT (hauteur réduite)
+   * ================================ */
+
+  @media (max-height: 600px) {
+    .hero-container {
+      min-height: calc(100vh - 60px);
+      padding-top: var(--space-sm);
+    }
+
     .hero-content {
       margin-bottom: var(--space-md);
     }
 
     .hero-title {
-      font-size: var(--font-size-md);
-    }
-  }
-
-  /* Très petits écrans */
-  @media (max-width: 375px) {
-    .hero-title {
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-lg);
     }
   }
 </style>

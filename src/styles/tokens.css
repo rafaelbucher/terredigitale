@@ -1,8 +1,7 @@
 /**
- * Design System Tokens
+ * Design System Tokens - MOBILE FIRST ONLY
  * 
- * Ce fichier contient tous les tokens de design utilisés dans l'application.
- * Les tokens sont organisés par catégories : couleurs, typographie, espacements, etc.
+ * Tokens optimisés uniquement pour mobile, sans breakpoints desktop
  */
 
 :root {
@@ -39,64 +38,47 @@
   --color-highlight-darker: #058E74;
  
   /* ================================
-  * LOGO TOKENS
+  * LOGO TOKENS - MOBILE ONLY
   * ================================ */
 
-  /* Tailles du logo */
-  --logo-size-xs: 24px;        /* Favicon, icônes */
-  --logo-size-sm: 32px;        /* Navigation mobile */
-  --logo-size-md: 48px;        /* Navigation desktop */
-  --logo-size-lg: 64px;        /* En-têtes de section */
-  --logo-size-xl: 96px;        /* Hero, landing pages */
-  --logo-size-2xl: 128px;      /* Pages spéciales */
-  --logo-size-3xl: 200px;      /* Version très large */
-
-  /* Tailles du texte (proportionnelles au logo) */
-  --logo-text-ratio: 0.3;      /* Ratio texte/logo height */
+  /* Tailles du logo - optimisées mobile */
+  --logo-size-xs: 20px;        /* Favicon mobile */
+  --logo-size-sm: 28px;        /* Navigation mobile */
+  --logo-size-md: 36px;        /* Navigation mobile standard */
+  --logo-size-lg: 48px;        /* En-têtes mobile */
+  --logo-size-xl: 64px;        /* Hero mobile */
 
   /* Couleurs du logo */
-  --logo-color-primary: var(--color-primary);           /* Couleur principale (#1E1E1E) */
-  --logo-color-light: var(--color-neutral-lighter);     /* Version claire pour fonds sombres */
-  --logo-color-secondary: var(--color-secondary);       /* Version colorée avec accent */
-  --logo-color-highlight: var(--color-highlight);       /* Version avec couleur highlight */
-  --logo-color-mono-white: #FFFFFF;                     /* Blanc pur */
-  --logo-color-mono-black: #000000;                     /* Noir pur */
+  --logo-color-primary: var(--color-primary);
+  --logo-color-light: var(--color-neutral-lighter);
+  --logo-color-secondary: var(--color-secondary);
+  --logo-color-highlight: var(--color-highlight);
+  --logo-color-mono-white: #FFFFFF;
+  --logo-color-mono-black: #000000;
 
   /* Transitions pour le logo */
-  --logo-transition: all var(--duration-normal) var(--ease-out);
-  --logo-hover-scale: 1.05;                             /* Légère augmentation au survol */
-  --logo-active-scale: 0.95;                            /* Légère réduction au clic */
+  --logo-transition: all 0.3s ease;
+  --logo-hover-scale: 1.05;
+  --logo-active-scale: 0.95;
 
-  /* Espacements autour du logo */
-  --logo-margin-inline: var(--space-md);                /* Marge horizontale standard */
-  --logo-margin-block: var(--space-sm);                 /* Marge verticale standard */
-  --logo-gap: var(--space-md);                          /* Espacement entre texte et SVG */
-  --logo-gap-mobile: var(--space-sm);                   /* Espacement réduit sur mobile */
-
-  /* Opacité pour différents états */
-  --logo-opacity-default: 1;
-  --logo-opacity-hover: 0.8;
-  --logo-opacity-disabled: 0.4;
+  /* Espacements autour du logo - mobile */
+  --logo-margin-inline: var(--space-sm);
+  --logo-margin-block: var(--space-xs);
+  --logo-gap: var(--space-sm);
 
   /* Typographie du texte logo */
-  --logo-text-weight: var(--font-weight-regular);       /* Roboto Regular */
-  --logo-text-spacing: 0.1em;                           /* Letter spacing pour lisibilité */
+  --logo-text-weight: 400;
+  --logo-text-spacing: 0.1em;
   
   /* ================================
-   * TYPOGRAPHIE
+   * TYPOGRAPHIE - MOBILE FIRST
    * ================================ */
   
-  /* Familles de police */
-  --font-family-primary:  -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  /* Familles de police - système uniquement */
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
-  /* Police système pour les headers - NOUVEAU */
-  --font-family-headers: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
-  
-  /* Police système serif - NOUVEAU */
-  --font-family-secondary: 'Charter', 'Bitstream Charter', 'Sitka Text', 'Cambria', 'serif-ui', Georgia, serif;
-  
-  /* Tailles de police */
+  /* Tailles de police - optimisées mobile */
   --font-size-xs: 0.75rem;     /* 12px */
   --font-size-sm: 0.875rem;    /* 14px */
   --font-size-base: 1rem;      /* 16px */
@@ -105,253 +87,118 @@
   --font-size-xl: 1.5rem;      /* 24px */
   --font-size-2xl: 1.75rem;    /* 28px */
   --font-size-3xl: 2rem;       /* 32px */
-  --font-size-4xl: 2.5rem;     /* 40px */
-  --font-size-5xl: 3rem;       /* 48px */
-  --font-size-6xl: 4rem;       /* 64px */
   
-  /* Poids de police */
-  --font-weight-thin: 100;
-  --font-weight-extralight: 200;
+  /* Poids de police - simplifiés */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-  --font-weight-black: 900;
   
-  /* Hauteurs de ligne */
-  --line-height-tight: 1.25;
-  --line-height-snug: 1.375;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
-  --line-height-loose: 2;
+  /* Hauteurs de ligne - optimisées mobile */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
   
-  /* Ensembles typographiques prédéfinis - HEADERS AVEC POLICE SYSTÈME */
-  --typography-h1: var(--font-weight-bold) var(--font-size-4xl)/var(--line-height-tight) var(--font-family-headers);
-  --typography-h2: var(--font-weight-bold) var(--font-size-3xl)/var(--line-height-tight) var(--font-family-headers);
-  --typography-h3: var(--font-weight-semibold) var(--font-size-2xl)/var(--line-height-snug) var(--font-family-headers);
-  --typography-h4: var(--font-weight-semibold) var(--font-size-xl)/var(--line-height-snug) var(--font-family-headers);
-  --typography-h5: var(--font-weight-medium) var(--font-size-lg)/var(--line-height-normal) var(--font-family-headers);
-  --typography-h6: var(--font-weight-medium) var(--font-size-base)/var(--line-height-normal) var(--font-family-headers);
+  /* Ensembles typographiques - mobile first */
+  --typography-h1: var(--font-weight-bold) var(--font-size-2xl)/var(--line-height-tight) var(--font-family-primary);
+  --typography-h2: var(--font-weight-bold) var(--font-size-xl)/var(--line-height-tight) var(--font-family-primary);
+  --typography-h3: var(--font-weight-medium) var(--font-size-lg)/var(--line-height-normal) var(--font-family-primary);
+  --typography-h4: var(--font-weight-medium) var(--font-size-md)/var(--line-height-normal) var(--font-family-primary);
   --typography-body: var(--font-weight-regular) var(--font-size-base)/var(--line-height-normal) var(--font-family-primary);
-  --typography-body-sm: var(--font-weight-regular) var(--font-size-sm)/var(--line-height-normal) var(--font-family-primary);
-  --typography-caption: var(--font-weight-regular) var(--font-size-xs)/var(--line-height-normal) var(--font-family-primary);
-  
-  /* Ensembles typographiques avec police serif - NOUVEAU */
-  --typography-serif-large: var(--font-weight-regular) var(--font-size-xl)/var(--line-height-relaxed) var(--font-family-secondary);
-  --typography-serif-body: var(--font-weight-regular) var(--font-size-base)/var(--line-height-relaxed) var(--font-family-secondary);
-  --typography-serif-quote: var(--font-weight-regular) var(--font-size-lg)/var(--line-height-relaxed) var(--font-family-secondary);
-  --typography-serif-emphasis: var(--font-weight-medium) var(--font-size-md)/var(--line-height-normal) var(--font-family-secondary);
+  --typography-small: var(--font-weight-regular) var(--font-size-sm)/var(--line-height-normal) var(--font-family-primary);
   
   /* ================================
-   * ESPACEMENTS
+   * ESPACEMENTS - MOBILE GRID
    * ================================ */
   
-  /* Échelle d'espacement basée sur 8pt grid */
-  --space-0: 0;           /* 0px */
-  --space-1: 0.125rem;    /* 2px - 8/4 */
-  --space-2: 0.25rem;     /* 4px - 8/2 */
-  --space-4: 0.5rem;      /* 8px - 8×1 */
-  --space-6: 0.75rem;     /* 12px - 8×1.5 */
-  --space-8: 1rem;        /* 16px - 8×2 */
-  --space-12: 1.5rem;     /* 24px - 8×3 */
-  --space-16: 2rem;       /* 32px - 8×4 */
-  --space-20: 2.5rem;     /* 40px - 8×5 */
-  --space-24: 3rem;       /* 48px - 8×6 */
-  --space-32: 4rem;       /* 64px - 8×8 */
-  --space-40: 5rem;       /* 80px - 8×10 */
-  --space-48: 6rem;       /* 96px - 8×12 */
-  --space-56: 7rem;       /* 112px - 8×14 */
-  --space-64: 8rem;       /* 128px - 8×16 */
-  --space-80: 10rem;      /* 160px - 8×20 */
-  --space-96: 12rem;      /* 192px - 8×24 */
-  --space-128: 16rem;     /* 256px - 8×32 */
+  /* Échelle d'espacement mobile - 4pt grid */
+  --space-0: 0;
+  --space-1: 0.25rem;     /* 4px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-8: 2rem;        /* 32px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
   
-  /* Espacements sémantiques pour une utilisation rapide */
-  --space-xs: var(--space-2);      /* 4px */
-  --space-sm: var(--space-4);      /* 8px */
-  --space-md: var(--space-8);      /* 16px */
-  --space-lg: var(--space-16);     /* 32px */
-  --space-xl: var(--space-24);     /* 48px */
-  --space-2xl: var(--space-32);    /* 64px */
-  --space-3xl: var(--space-48);    /* 96px */
-  --space-4xl: var(--space-64);    /* 128px */
+  /* Espacements sémantiques mobile */
+  --space-xs: var(--space-1);      /* 4px */
+  --space-sm: var(--space-2);      /* 8px */
+  --space-md: var(--space-4);      /* 16px */
+  --space-lg: var(--space-6);      /* 24px */
+  --space-xl: var(--space-8);      /* 32px */
   
-  /* Espacements pour composants spécifiques */
-  --space-component-padding: var(--space-md);      /* Padding intérieur standard */
-  --space-component-margin: var(--space-lg);       /* Margin entre composants */
-  --space-section-padding: var(--space-xl);        /* Padding des sections */
-  --space-container-padding: var(--space-lg);      /* Padding des conteneurs */
-  --space-grid-gap: var(--space-md);              /* Gap pour les grilles */
-  --space-inline-gap: var(--space-sm);            /* Gap pour éléments inline */
+  /* Espacements pour composants mobile */
+  --space-component-padding: var(--space-md);
+  --space-component-margin: var(--space-lg);
+  --space-section-padding: var(--space-lg);
+  --space-container-padding: var(--space-md);
   
   /* ================================
-   * OMBRES
+   * OMBRES - SIMPLIFIÉES MOBILE
    * ================================ */
   
-  /* Ombres d'élévation (Material Design inspired) */
+  /* Ombres de base */
   --shadow-none: none;
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);                    /* Subtile */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);  /* Légère */
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);  /* Moyenne */
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);  /* Grande */
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);  /* Extra large */
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);             /* Maximale */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   
-  /* Ombres colorées avec les couleurs du système */
-  --shadow-primary: 0 4px 14px 0 rgba(30, 30, 30, 0.15);          /* Ombre avec couleur primaire */
-  --shadow-secondary: 0 4px 14px 0 rgba(250, 97, 71, 0.2);        /* Ombre avec couleur secondaire */
-  --shadow-highlight: 0 4px 14px 0 rgba(8, 168, 144, 0.2);        /* Ombre avec couleur highlight */
+  /* Ombres pour états */
+  --shadow-focus: 0 0 0 3px rgba(8, 168, 144, 0.2);
   
-  /* Ombres pour états interactifs */
-  --shadow-hover: 0 8px 25px -8px rgba(0, 0, 0, 0.15);            /* Survol */
-  --shadow-focus: 0 0 0 3px rgba(8, 168, 144, 0.2);               /* Focus avec couleur highlight */
-  --shadow-active: 0 2px 4px 0 rgba(0, 0, 0, 0.15);               /* État actif (pressé) */
-  
-  /* Ombres spécialisées pour composants */
-  --shadow-card: var(--shadow-sm);                                 /* Cartes */
-  --shadow-card-hover: var(--shadow-lg);                           /* Cartes au survol */
-  --shadow-button: var(--shadow-xs);                               /* Boutons */
-  --shadow-button-hover: var(--shadow-md);                         /* Boutons au survol */
-  --shadow-modal: var(--shadow-2xl);                               /* Modales */
-  --shadow-dropdown: var(--shadow-lg);                             /* Menus déroulants */
-  --shadow-tooltip: var(--shadow-md);                              /* Tooltips */
-  --shadow-navbar: var(--shadow-sm);                               /* Barres de navigation */
-  
-  /* Ombres intérieures */
-  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);         /* Ombre intérieure */
-  --shadow-inset-lg: inset 0 4px 8px 0 rgba(0, 0, 0, 0.1);       /* Ombre intérieure grande */
+  /* Ombres pour composants */
+  --shadow-card: var(--shadow-sm);
+  --shadow-button: var(--shadow-sm);
   
   /* ================================
-   * RAYONS DE BORDURE
+   * RAYONS DE BORDURE - TOUS À 0
    * ================================ */
   
-  /* Tous les rayons définis à 0 pour un design avec angles droits */
   --radius-none: 0;
-  --radius-xs: 0;
   --radius-sm: 0;
   --radius-md: 0;
   --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-2xl: 0;
-  --radius-3xl: 0;
-  
-  /* Rayons spéciaux également à 0 */
-  --radius-full: 0;            /* Pas de cercles */
-  --radius-pill: 0;            /* Pas de formes pilule */
-  
-  /* Rayons pour composants - tous à 0 */
   --radius-button: 0;
-  --radius-button-sm: 0;
-  --radius-button-lg: 0;
-  --radius-button-pill: 0;
-  
   --radius-card: 0;
-  --radius-card-sm: 0;
-  --radius-card-lg: 0;
-  
-  --radius-input: 0;
-  --radius-input-sm: 0;
-  --radius-input-lg: 0;
-  
-  --radius-modal: 0;
-  --radius-dropdown: 0;
-  --radius-tooltip: 0;
-  --radius-badge: 0;
-  --radius-avatar: 0;
-  --radius-avatar-square: 0;
-  
-  --radius-image: 0;
-  --radius-image-sm: 0;
-  --radius-image-lg: 0;
-  
-  /* Rayons pour layouts - tous à 0 */
-  --radius-container: 0;
-  --radius-section: 0;
-  --radius-panel: 0;
   
   /* ================================
-   * TRANSITIONS
+   * TRANSITIONS - SIMPLIFIÉES
    * ================================ */
   
-  /* Durées de transition */
-  --duration-instant: 0ms;
-  --duration-fast: 150ms;        /* Micro-interactions rapides */
-  --duration-normal: 250ms;      /* Standard pour la plupart des cas */
-  --duration-slow: 350ms;        /* Animations plus visibles */
-  --duration-slower: 500ms;      /* Transitions importantes */
-  --duration-slowest: 750ms;     /* Animations complexes */
+  /* Durées simples */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
   
-  /* Fonctions de timing (easing) */
-  --ease-linear: linear;
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  /* Easing simple */
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);        /* Rapide au début, lent à la fin */
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Effet rebond */
   
-  /* Transitions prédéfinies pour éléments courants */
+  /* Transitions prédéfinies */
   --transition-colors: color var(--duration-fast) var(--ease-out), 
-                       background-color var(--duration-fast) var(--ease-out), 
-                       border-color var(--duration-fast) var(--ease-out);
-  --transition-opacity: opacity var(--duration-fast) var(--ease-out);
-  --transition-shadow: box-shadow var(--duration-normal) var(--ease-out);
+                       background-color var(--duration-fast) var(--ease-out);
   --transition-transform: transform var(--duration-normal) var(--ease-out);
   --transition-all: all var(--duration-fast) var(--ease-out);
-  
-  /* Transitions pour composants spécifiques */
-  --transition-button: var(--transition-colors), var(--transition-shadow);
-  --transition-card: var(--transition-shadow), var(--transition-transform);
-  --transition-modal: opacity var(--duration-normal) var(--ease-out), 
-                      transform var(--duration-normal) var(--ease-out);
-  --transition-dropdown: opacity var(--duration-fast) var(--ease-out), 
-                         transform var(--duration-fast) var(--ease-out);
-  --transition-tooltip: var(--transition-opacity);
 
   /* ================================
-   * BREAKPOINTS
+   * BREAKPOINTS - MOBILE ONLY
    * ================================ */
   
-  /* Points de rupture pour le responsive */
-  --breakpoint-xs: 320px;        /* Très petits écrans (anciens mobiles) */
-  --breakpoint-sm: 640px;        /* Mobiles */
-  --breakpoint-md: 768px;        /* Tablettes */
-  --breakpoint-lg: 1024px;       /* Desktop petit */
-  --breakpoint-xl: 1280px;       /* Desktop */
-  --breakpoint-2xl: 1536px;      /* Large desktop */
+  /* Un seul breakpoint pour très petits écrans */
+  --breakpoint-xs: 320px;
   
-  /* Container max-widths correspondants */
-  --container-xs: 100%;
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-  --container-2xl: 1536px;
+  /* Container mobile uniquement */
+  --container-mobile: 100%;
 
   /* ================================
-   * Z-INDEX
+   * Z-INDEX - SIMPLIFIÉ
    * ================================ */
   
-  /* Niveaux de profondeur */
-  --z-auto: auto;
-  --z-0: 0;                      /* Niveau de base */
-  --z-10: 10;                    /* Éléments légèrement surélevés */
-  --z-20: 20;                    /* Cartes, dropdowns */
-  --z-30: 30;                    /* Éléments flottants */
-  --z-40: 40;                    /* Navigation fixe */
-  --z-50: 50;                    /* Overlays, modales */
-  
-  /* Z-index sémantiques pour composants */
-  --z-base: var(--z-0);          /* Contenu de base */
-  --z-raised: var(--z-10);       /* Éléments surélevés */
-  --z-dropdown: var(--z-20);     /* Menus déroulants */
-  --z-sticky: var(--z-20);       /* Éléments collants */
-  --z-tooltip: var(--z-30);      /* Tooltips */
-  --z-popover: var(--z-30);      /* Popovers */
-  --z-navbar: var(--z-40);       /* Barre de navigation */
-  --z-sidebar: var(--z-40);      /* Barre latérale */
-  --z-modal-backdrop: var(--z-50); /* Fond de modale */
-  --z-modal: calc(var(--z-50) + 1); /* Modale */
-  --z-notification: calc(var(--z-50) + 2); /* Notifications/Toast */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-navbar: 40;
+  --z-modal: 50;
 }

@@ -2,10 +2,9 @@
 @import './tokens.css';
 
 /* ================================
- * RESET & BASE STYLES
+ * RESET & BASE STYLES - MOBILE ONLY
  * ================================ */
 
-/* Modern CSS Reset */
 *,
 *::before,
 *::after {
@@ -18,7 +17,8 @@
 }
 
 html {
-  font-size: 16px; /* Base pour rem */
+  font-size: 16px;
+  height: 100%;
 }
 
 body {
@@ -26,88 +26,66 @@ body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-normal);
-  color: var(--color-primary);
-  background-color: var(--color-primary); /* Couleur fixe au lieu de neutral-lighter */
+  color: var(--color-neutral-lighter);
+  background-color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ================================
- * TYPOGRAPHY BASE
+ * TYPOGRAPHY - MOBILE FIRST
  * ================================ */
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--space-md);
-  color: var(--color-neutral-lighter); /* Couleur claire pour contraste sur fond sombre */
+  color: var(--color-neutral-lighter);
 }
 
 h1 { font: var(--typography-h1); }
 h2 { font: var(--typography-h2); }
 h3 { font: var(--typography-h3); }
 h4 { font: var(--typography-h4); }
-h5 { font: var(--typography-h5); }
-h6 { font: var(--typography-h6); }
 
 p {
   font: var(--typography-body);
   margin-bottom: var(--space-md);
-  color: var(--color-neutral-lighter); /* Couleur claire pour contraste sur fond sombre */
+  color: var(--color-neutral-lighter);
 }
 
 small {
-  font: var(--typography-caption);
+  font: var(--typography-small);
   color: var(--color-neutral-light);
 }
 
 /* ================================
- * UTILITY CLASSES
+ * UTILITY CLASSES - MOBILE ESSENTIALS
  * ================================ */
 
-/* Spacing utilities */
-.mt-xs { margin-top: var(--space-xs); }
+/* Spacing utilities essentiels */
 .mt-sm { margin-top: var(--space-sm); }
 .mt-md { margin-top: var(--space-md); }
 .mt-lg { margin-top: var(--space-lg); }
-.mt-xl { margin-top: var(--space-xl); }
 
-.mb-xs { margin-bottom: var(--space-xs); }
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
 .mb-lg { margin-bottom: var(--space-lg); }
-.mb-xl { margin-bottom: var(--space-xl); }
 
-.p-xs { padding: var(--space-xs); }
 .p-sm { padding: var(--space-sm); }
 .p-md { padding: var(--space-md); }
 .p-lg { padding: var(--space-lg); }
-.p-xl { padding: var(--space-xl); }
 
-/* Color utilities */
-.text-primary { color: var(--color-primary); }
+/* Color utilities essentiels */
 .text-secondary { color: var(--color-secondary); }
 .text-highlight { color: var(--color-highlight); }
-.text-neutral { color: var(--color-neutral-dark); }
 
 .bg-primary { background-color: var(--color-primary); }
 .bg-secondary { background-color: var(--color-secondary); }
-.bg-highlight { background-color: var(--color-highlight); }
-.bg-neutral { background-color: var(--color-neutral); }
-
-/* Shadow utilities */
-.shadow-sm { box-shadow: var(--shadow-sm); }
-.shadow-md { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
-.shadow-card { box-shadow: var(--shadow-card); }
-
-/* Border radius utilities */
-.rounded-sm { border-radius: var(--radius-sm); }
-.rounded-md { border-radius: var(--radius-md); }
-.rounded-lg { border-radius: var(--radius-lg); }
-.rounded-xl { border-radius: var(--radius-xl); }
-.rounded-full { border-radius: var(--radius-full); }
 
 /* ================================
- * COMPONENT BASE CLASSES
+ * COMPONENTS - MOBILE FIRST
  * ================================ */
 
 .btn {
@@ -116,23 +94,18 @@ small {
   justify-content: center;
   padding: var(--space-sm) var(--space-md);
   border: none;
-  border-radius: 0; /* Pas de border-radius */
+  border-radius: var(--radius-button);
   font: var(--typography-body);
   font-weight: var(--font-weight-medium);
   text-decoration: none;
   cursor: pointer;
-  transition: var(--transition-button);
+  transition: var(--transition-colors);
   box-shadow: var(--shadow-button);
+  min-height: 44px; /* Touch target mobile */
 }
 
-.btn:hover {
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-1px);
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: var(--shadow-focus);
+.btn:active {
+  transform: translateY(1px);
 }
 
 .btn-primary {
@@ -140,17 +113,9 @@ small {
   color: var(--color-neutral-lighter);
 }
 
-.btn-primary:hover {
-  background-color: var(--color-secondary-dark);
-}
-
 .btn-secondary {
   background-color: var(--color-neutral);
   color: var(--color-primary);
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-neutral-dark);
 }
 
 .btn-highlight {
@@ -158,74 +123,73 @@ small {
   color: var(--color-neutral-lighter);
 }
 
-.btn-highlight:hover {
-  background-color: var(--color-highlight-dark);
-}
-
 .card {
-  border-radius: 0; /* Pas de border-radius */
+  border-radius: var(--radius-card);
   padding: var(--space-lg);
   box-shadow: var(--shadow-card);
-  transition: var(--transition-card);
-  color: var(--color-neutral-lighter); /* Texte clair dans les cartes */
-}
-
-.card:hover {
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  color: var(--color-neutral-lighter);
 }
 
 /* ================================
- * LAYOUT UTILITIES
+ * LAYOUT - MOBILE CONTAINER
  * ================================ */
 
 .container {
   width: 100%;
-  max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-md);
 }
 
 .section {
   padding: var(--space-section-padding) 0;
+  margin: calc(var(--space-xl) * 2) 0;
+  padding: calc(var(--space-xl) * 2) var(--space-md);
 }
 
 /* ================================
- * RESPONSIVE UTILITIES
+ * MOBILE SPECIFIC OPTIMIZATIONS
  * ================================ */
 
-@media (min-width: 640px) {
-  .container {
-    padding: 0 var(--space-lg);
-  }
+/* Touch targets */
+button, 
+a, 
+input, 
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
 }
 
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 var(--space-xl);
-  }
+/* Focus visible pour navigation clavier mobile */
+:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
+/* Scroll smooth pour navigation mobile */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimisations tactiles */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Éviter les zooms sur les inputs */
+input,
+textarea,
+select {
+  font-size: 16px;
 }
 
 /* ================================
- * STATIQUE - PAS D'ANIMATION SCROLL
+ * VIEWPORT TRÈS PETIT (320px)
  * ================================ */
 
-/* Le body garde sa couleur fixe sans animation */
-body {
-  background-color: var(--color-primary) !important;
-}
-
-/* Responsive - ajustements pour mobile */
-@media (max-width: 768px) {
-  .site-logo-container {
-    gap: 8px !important; 
+@media (max-width: 320px) {
+  .container {
+    padding: 0 var(--space-sm);
   }
-
-  .site-logo {
-    width: var(--logo-size-sm) !important;
-    height: var(--logo-size-sm) !important;
-  }
-  .logo-text {
-    font-size: 10px !important;
-  }
+  
+  h1 { font-size: var(--font-size-xl); }
+  h2 { font-size: var(--font-size-lg); }
 }

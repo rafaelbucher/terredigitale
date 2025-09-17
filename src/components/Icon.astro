@@ -1,38 +1,39 @@
 ---
+// Icon.astro - MOBILE FIRST ONLY
+export interface Props {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  color?: 'primary' | 'secondary' | 'highlight' | 'light' | 'mono-white' | 'mono-black';
+  class?: string;
+}
+
 const { 
-  size = 'md',
-  color = 'light', // Couleur par défaut changée en 'light'
+  size = 'sm', // Taille par défaut mobile
+  color = 'light',
   class: className = '',
   ...props 
 } = Astro.props;
 
-const getSizeValue = (size: string | number) => {
-  if (typeof size === 'number') {
-    return `${size}px`;
-  }
+const getSizeValue = (size: string): string => {
   const sizeMap: Record<string, string> = {
-    'xs': 'var(--logo-size-xs)',
-    'sm': 'var(--logo-size-sm)',
-    'md': 'var(--logo-size-md)',
-    'lg': 'var(--logo-size-lg)',
-    'xl': 'var(--logo-size-xl)',
-    '2xl': 'var(--logo-size-2xl)',
-    '3xl': 'var(--logo-size-3xl)',
+    'xs': 'var(--logo-size-xs)',    // 20px
+    'sm': 'var(--logo-size-sm)',    // 28px
+    'md': 'var(--logo-size-md)',    // 36px
+    'lg': 'var(--logo-size-lg)',    // 48px
+    'xl': 'var(--logo-size-xl)',    // 64px
   };
-  return sizeMap[size as string] || sizeMap.md;
+  return sizeMap[size] || sizeMap.sm;
 };
 
-const getColorValue = (color: string) => {
-  const colorMap = {
+const getColorValue = (color: string): string => {
+  const colorMap: Record<string, string> = {
     'primary': 'var(--color-primary)',
     'secondary': 'var(--color-secondary)',
     'highlight': 'var(--color-highlight)',
-    'neutral': 'var(--color-neutral-dark)',
     'light': 'var(--color-neutral-lighter)',
     'mono-white': '#FFFFFF',
     'mono-black': '#000000'
   };
-  return colorMap[color as keyof typeof colorMap] || color;
+  return colorMap[color] || colorMap.light;
 };
 
 const sizeValue = getSizeValue(size);
@@ -57,10 +58,20 @@ const colorValue = getColorValue(color);
 </svg>
 
 <style>
-  .icon-path {
-    transition: fill 0.3s ease;
+  /* ================================
+   * ICON - MOBILE OPTIMIZED
+   * ================================ */
+  
+  .icon {
+    display: block;
+    flex-shrink: 0;
   }
 
+  .icon-path {
+    transition: var(--transition-colors);
+  }
+
+  /* Couleurs par défaut */
   .icon-color-light path {
     fill: var(--color-neutral-lighter);
   }
@@ -69,9 +80,22 @@ const colorValue = getColorValue(color);
     fill: var(--color-secondary);
   }
 
-  /* États pour l'icône quand le menu est ouvert */
+  .icon-color-primary path {
+    fill: var(--color-primary);
+  }
+
+  .icon-color-highlight path {
+    fill: var(--color-highlight);
+  }
+
+  /* États pour l'icône */
   .icon.menu-open .icon-path,
   .icon.menu-open path {
     fill: var(--color-secondary) !important;
+  }
+
+  /* Optimisation tactile */
+  .icon {
+    -webkit-tap-highlight-color: transparent;
   }
 </style>
