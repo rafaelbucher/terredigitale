@@ -136,12 +136,20 @@ small {
 
 .container {
   width: 100%;
-  margin: 0 auto;
 }
 
 .section {
-  padding: var(--space-section-padding) 0;
   margin: calc(var(--space-xl) * 2) 0;
+  padding: calc(var(--space-xl) * 2) var(--space-md);
+}
+
+.section--full {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   padding: calc(var(--space-xl) * 2) var(--space-md);
 }
 
